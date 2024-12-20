@@ -35,13 +35,10 @@ class Document(Node):
     def __init__(self, node, root="window"):
         super().__init__(node)
         self.root = root
-        # self.node = node
 
     @property
-    def children(self):
-
-        # TODO: Convert nodes to Node objects before returning a list of them.
-        return self.node.get("children")
+    def children(self) -> list[dict]:
+        return self.node.get("document")["children"]
 
 
 class Canvas(Node):
@@ -75,22 +72,22 @@ class Slice(Node):
 
     @property
     def export_settings(self):
-        # TODO: Native conversion
+
         return self.node.get("exportSettings")
 
     @property
     def absolute_bounding_box(self):
-        # TODO: Native conversion
+
         return self.node.get("absoluteBoundingBox")
 
     @property
     def size(self):
-        # TODO: Native conversion
+
         return self.node.get("size")
 
     @property
     def relative_transform(self):
-        # TODO: Native conversion
+
         return self.node.get("relativeTransform")
 
 
@@ -1484,13 +1481,11 @@ test_data = {
 
 
 def main():
-    document_node = Node(test_data)
-    print(document_node.node["document"]["children"])
-    # print("Node ID:", document_node.id)
-    # print("Node Name:", document_node.name)
-    # print("Node Type:", document_node.type)
-    # print("Node Visible:", document_node.visible)
-    # Test children
+    mynode = Node(test_data)
+    document_node = Document(mynode)
+    # print(document_node.children)
+    canvas_node = Canvas(document_node.children[0])
+    print(canvas_node.children[0])
 
 
 if __name__ == "__main__":
