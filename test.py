@@ -19,7 +19,7 @@ def main(page: ft.Page):
                     ft.Container(
                         width=300,
                         height=200,
-                        bgcolor="orange",
+                        bgcolor="#FFFFFF",
                         content=ft.Stack(
                             [
                                 ft.Container(
@@ -34,7 +34,7 @@ def main(page: ft.Page):
                     ),
                 ]
             ),
-        ),
+        )
     )
 
 

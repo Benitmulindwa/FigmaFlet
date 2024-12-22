@@ -62,7 +62,7 @@ class Rectangle(Vector):
             top={self.y},
             width={self.width},
             height={self.height},
-            bgcolor="{self.bg_color}",),
+            bgcolor="{self.bg_color}",)
 """
 
 
@@ -118,7 +118,7 @@ class Text(Vector):
             left={self.x},
             top={self.y},
             width={self.width},
-            height={self.height},),
+            height={self.height},)
         """
 
 
@@ -200,8 +200,8 @@ class Frame(Node):
                 bgcolor="{self.bg_color}",
                 content=ft.Stack([
                     {children_code},
-                ]),
-            ),
+                ])
+            )
         """
         else:
             return f"""
