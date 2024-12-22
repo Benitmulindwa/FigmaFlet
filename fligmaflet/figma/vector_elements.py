@@ -80,7 +80,7 @@ class Text(Vector):
     def characters(self) -> str:
         string: str = self.node.get("characters")
         text_case: str = self.style.get("textCase", "ORIGINAL")
-        print("STYLE: ", self.style)
+
         if text_case == "UPPER":
             string = string.upper()
         elif text_case == "LOWER":
@@ -192,16 +192,25 @@ class Frame(Node):
     def to_code(self, template=None):
         # Generate code for all child elements
         children_code = ",\n".join(child.to_code() for child in self.elements)
-        return f"""
-        ft.Container(
-            width={self.width},
-            height={self.height},
-            bgcolor="{self.bg_color}",
-            content=ft.Stack([
-                {children_code},
-            ]),
-        ),
-"""
+        if children_code:
+            return f"""
+            ft.Container(
+                width={self.width},
+                height={self.height},
+                bgcolor="{self.bg_color}",
+                content=ft.Stack([
+                    {children_code},
+                ]),
+            ),
+        """
+        else:
+            return f"""
+            ft.Container(
+                width={self.width},
+                height={self.height},
+                bgcolor="{self.bg_color}",
+            )
+            """
 
     # def to_code(self, template):
     #     t = Template(template)
