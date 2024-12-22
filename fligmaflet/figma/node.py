@@ -1478,15 +1478,3 @@ test_data = {
     "editorType": "figma",
     "linkAccess": "view",
 }
-
-
-def main():
-    mynode = Node(test_data)
-    document_node = Document(mynode)
-    # print(document_node.children)
-    canvas_node = Canvas(document_node.children[0])
-    print(canvas_node.children[0])
-
-
-if __name__ == "__main__":
-    main()
