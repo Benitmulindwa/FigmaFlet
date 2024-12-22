@@ -66,61 +66,6 @@ class Rectangle(Vector):
 """
 
 
-class Frame(Node):
-    def __init__(self, node):
-        super().__init__(node)
-
-        self.width, self.height = self.size()
-        self.bg_color = self.color()
-
-        self.counter = {}
-
-        self.elements = [
-            self.create_element(child) for child in self.children if Node(child).visible
-        ]
-        # print(self.elements[0].color)
-
-    def create_element(self, element):
-        element_name = element["name"].strip().lower()
-        element_type = element["type"].strip().lower()
-
-        # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
-        # EXPERIMENTAL FEATURE
-
-        if element_name == "rectangle" or element_type == "rectangle":
-            return Rectangle(element, self)
-        if element_type == "text":
-            return Text(element, self)
-
-    @property
-    def children(self):
-        # TODO: Convert nodes to Node objects before returning a list of them.
-        return self.node.get("children")
-
-    def color(self) -> str:
-        """Returns HEX form of element RGB color (str)"""
-        try:
-            color = self.node["fills"][0]["color"]
-            r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
-            print("COLOR:", f"#{r:02X}{g:02X}{b:02X}")
-            return f"#{r:02X}{g:02X}{b:02X}"
-
-        except Exception:
-            return "#FFFFFF"
-
-    def size(self) -> tuple:
-        """Returns element dimensions as width (int) and height (int)"""
-        bbox = self.node["absoluteBoundingBox"]
-        width = bbox["width"]
-        height = bbox["height"]
-        return int(width), int(height)
-
-    def to_code(self, template):
-        t = Template(template)
-        rendered_elements = [element.to_code() for element in self.elements if element]
-        return t.render(elements=rendered_elements)
-
-
 class Text(Vector):
     def __init__(self, node, frame):
         super().__init__(node)
@@ -135,7 +80,7 @@ class Text(Vector):
     def characters(self) -> str:
         string: str = self.node.get("characters")
         text_case: str = self.style.get("textCase", "ORIGINAL")
-
+        print("STYLE: ", self.style)
         if text_case == "UPPER":
             string = string.upper()
         elif text_case == "LOWER":
@@ -194,80 +139,133 @@ ft.Container(
 """
 
 
-test_data = test_data = {
+class Frame(Node):
+    def __init__(self, node):
+        super().__init__(node)
+
+        self.width, self.height = self.size()
+        self.bg_color = self.color()
+
+        self.counter = {}
+
+        self.elements = [
+            self.create_element(child) for child in self.children if Node(child).visible
+        ]
+        # print(self.elements[0].color)
+
+    def create_element(self, element):
+        element_name = element["name"].strip().lower()
+        element_type = element["type"].strip().lower()
+
+        # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
+        # EXPERIMENTAL FEATURE
+        if element_type == "frame":
+            return Frame(element)
+        if element_name == "rectangle" or element_type == "rectangle":
+            return Rectangle(element, self)
+        if element_type == "text":
+            return Text(element, self)
+
+    @property
+    def children(self):
+        # TODO: Convert nodes to Node objects before returning a list of them.
+        return self.node.get("children")
+
+    def color(self) -> str:
+        """Returns HEX form of element RGB color (str)"""
+        try:
+            color = self.node["fills"][0]["color"]
+            r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+
+            return f"#{r:02X}{g:02X}{b:02X}"
+
+        except Exception:
+            return "#FFFFFF"
+
+    def size(self) -> tuple:
+        """Returns element dimensions as width (int) and height (int)"""
+        bbox = self.node["absoluteBoundingBox"]
+        width = bbox["width"]
+        height = bbox["height"]
+        return int(width), int(height)
+
+    def to_code(self, template=None):
+        # Generate code for all child elements
+        children_code = ",\n".join(child.to_code() for child in self.elements)
+        return f"""
+        ft.Container(
+            width={self.width},
+            height={self.height},
+            bgcolor="{self.bg_color}",
+            content=ft.Stack([
+                {children_code},
+            ]),
+        ),
+"""
+
+    # def to_code(self, template):
+    #     t = Template(template)
+    #     # Flatten the hierarchy of elements
+    #     all_elements = self.flatten_elements()
+    #     return t.render(elements=all_elements)
+
+    # def flatten_elements(self):
+    #     """Recursively collect all child elements."""
+    #     all_elements = []
+    #     for element in self.elements:
+    #         if isinstance(element, Frame):
+    #             all_elements.extend(element.flatten_elements())
+    #         elif element:
+    #             all_elements.append(element)
+    #     return all_elements
+
+
+test_data = {
     "id": "1",
-    "name": "Frame",
+    "name": "Main Frame",
     "type": "FRAME",
-    "absoluteBoundingBox": {"x": 10, "y": 20, "width": 300, "height": 200},
+    "absoluteBoundingBox": {"x": 0, "y": 0, "width": 600, "height": 400},
     "children": [
         {
             "id": "2",
             "name": "Rectangle 1",
             "type": "RECTANGLE",
-            "absoluteBoundingBox": {"x": 15, "y": 25, "width": 150, "height": 50},
+            "absoluteBoundingBox": {"x": 10, "y": 20, "width": 200, "height": 100},
             "fills": [{"color": {"r": 1, "g": 0, "b": 0}}],
         },
         {
             "id": "3",
-            "name": "Rectangle 2",
-            "type": "RECTANGLE",
-            "absoluteBoundingBox": {"x": 50, "y": 75, "width": 100, "height": 100},
-            "fills": [{"color": {"r": 0, "g": 1, "b": 0}}],
-        },
-        {
-            "id": "1:11",
-            "name": "FletEditor",
-            "type": "TEXT",
-            "scrollBehavior": "SCROLLS",
-            "blendMode": "PASS_THROUGH",
-            "fills": [
+            "name": "Nested Frame",
+            "type": "FRAME",
+            "absoluteBoundingBox": {"x": 50, "y": 60, "width": 300, "height": 200},
+            "children": [
                 {
-                    "blendMode": "NORMAL",
-                    "type": "SOLID",
-                    "color": {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0},
+                    "id": "4",
+                    "name": "Text in Nested Frame",
+                    "type": "TEXT",
+                    "absoluteBoundingBox": {
+                        "x": 60,
+                        "y": 80,
+                        "width": 100,
+                        "height": 30,
+                    },
+                    "characters": "Nested Text",
+                    "style": {
+                        "fontFamily": "Montserrat",
+                        "fontPostScriptName": "Montserrat-Regular",
+                        "fontWeight": 400,
+                        "textAutoResize": "WIDTH_AND_HEIGHT",
+                        "fontSize": 15.0,
+                        "textAlignHorizontal": "CENTER",
+                        "textAlignVertical": "TOP",
+                        "letterSpacing": 0.0,
+                        "lineHeightPx": 21.941999435424805,
+                        "lineHeightPercent": 100.0,
+                        "lineHeightUnit": "INTRINSIC_%",
+                    },
+                    "fills": [{"color": {"r": 0, "g": 0, "b": 1}}],
                 }
             ],
-            "strokes": [],
-            "strokeWeight": 1.0,
-            "strokeAlign": "OUTSIDE",
-            "absoluteBoundingBox": {
-                "x": 1.0,
-                "y": -347.0,
-                "width": 125.0,
-                "height": 29.0,
-            },
-            "absoluteRenderBounds": {
-                "x": 2.992000102996826,
-                "y": -342.88800048828125,
-                "width": 121.49419403076172,
-                "height": 19.079986572265625,
-            },
-            "constraints": {"vertical": "TOP", "horizontal": "LEFT"},
-            "layoutAlign": "INHERIT",
-            "layoutGrow": 0.0,
-            "layoutSizingHorizontal": "HUG",
-            "layoutSizingVertical": "HUG",
-            "characters": "FletEditor",
-            "style": {
-                "fontFamily": "Montserrat",
-                "fontPostScriptName": "Montserrat-Bold",
-                "fontWeight": 700,
-                "textAutoResize": "WIDTH_AND_HEIGHT",
-                "fontSize": 24.0,
-                "textAlignHorizontal": "LEFT",
-                "textAlignVertical": "TOP",
-                "letterSpacing": 0.0,
-                "lineHeightPx": 29.256000518798828,
-                "lineHeightPercent": 100.0,
-                "lineHeightUnit": "INTRINSIC_%",
-            },
-            "layoutVersion": 4,
-            "characterStyleOverrides": [],
-            "styleOverrideTable": {},
-            "lineTypes": ["NONE"],
-            "lineIndentations": [0],
-            "effects": [],
-            "interactions": [],
         },
     ],
 }
