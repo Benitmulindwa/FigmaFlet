@@ -38,7 +38,7 @@ class Document(Node):
 
     @property
     def children(self) -> list[dict]:
-        return self.node.get("document")["children"]
+        return self.node.get("children")
 
 
 class Canvas(Node):

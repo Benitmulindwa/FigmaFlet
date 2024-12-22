@@ -1,16 +1,10 @@
-template = """
-from flet import Container, Page
+TEMPLATE = """
+import flet as ft
 
-def main(page: Page):
+def main(page: ft.Page):
     page.add(
         {% for element in elements %}
-        Container(
-            left={{ element.x }},
-            top={{ element.y }},
-            width={{ element.width }},
-            height={{ element.height }},
-            bgcolor="{{ element.color }}"
-        ),
+        {{element}}
         {% endfor %}
     )
 """
