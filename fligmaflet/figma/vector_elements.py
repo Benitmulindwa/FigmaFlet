@@ -212,22 +212,6 @@ class Frame(Node):
             )
             """
 
-    # def to_code(self, template):
-    #     t = Template(template)
-    #     # Flatten the hierarchy of elements
-    #     all_elements = self.flatten_elements()
-    #     return t.render(elements=all_elements)
-
-    # def flatten_elements(self):
-    #     """Recursively collect all child elements."""
-    #     all_elements = []
-    #     for element in self.elements:
-    #         if isinstance(element, Frame):
-    #             all_elements.extend(element.flatten_elements())
-    #         elif element:
-    #             all_elements.append(element)
-    #     return all_elements
-
 
 test_data = {
     "id": "1",
