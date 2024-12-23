@@ -39,6 +39,9 @@ class Vector(Node):
         return x, y
 
 
+# Handled Figma Components
+
+
 class Rectangle(Vector):
     def __init__(self, node, frame):
         super().__init__(node)
@@ -165,6 +168,8 @@ class Frame(Node):
             return Rectangle(element, self)
         if element_type == "text":
             return Text(element, self)
+        else:
+            return UnknownElement(element, self)
 
     @property
     def children(self):
