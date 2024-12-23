@@ -16,7 +16,7 @@ class Vector(Node):
             return f"#{r:02X}{g:02X}{b:02X}"
 
         except Exception:
-            return "#FFFFFF"
+            return "transparent"
 
     def size(self):
         bbox = self.node["absoluteBoundingBox"]
@@ -117,7 +117,7 @@ class Text(Vector):
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value='{self.characters}', size={self.font_size}),
+            content=ft.Text(value='{self.characters}', size={self.font_size},color={self.color}),
             left={self.x},
             top={self.y},
             width={self.width},
@@ -134,11 +134,11 @@ class UnknownElement(Vector):
     def to_code(self):
         return f"""
 ft.Container(
-    left{self.x},
+    left={self.x},
     top={self.y},
     width={self.width},
-    height{self.height},
-    bgcolor="#000000")
+    height={self.height},
+    bgcolor="pink")
 """
 
 
@@ -1631,8 +1631,8 @@ def main():
     for f in test_data["document"]["children"][0]["children"]:
         frame = Frame(f)
         frames.append(frame)
-        # t = Template(TEMPLATE)
-        print(frames)
+        t = Template(TEMPLATE)
+    print(f.to_code() for f in frames)
     # print("\nCODE:", t.render(element=frame.to_code(TEMPLATE)))
 
 

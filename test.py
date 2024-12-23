@@ -104,14 +104,14 @@ def main(page: ft.Page):
                                                             top=0.0,
                                                             width=20.0,
                                                             height=20.0,
-                                                            bgcolor="#000000",
+                                                            bgcolor="pink",
                                                         ),
                                                         ft.Container(
                                                             left=30.0,
                                                             top=1.0,
                                                             width=18.0,
                                                             height=18.0,
-                                                            bgcolor="#000000",
+                                                            bgcolor="pink",
                                                         ),
                                                     ]
                                                 ),
@@ -123,11 +123,7 @@ def main(page: ft.Page):
                         ),
                     ),
                     ft.Container(
-                        left=422.0,
-                        top=290.0,
-                        width=658.0,
-                        height=158.0,
-                        bgcolor="#000000",
+                        left=422.0, top=290.0, width=658.0, height=158.0, bgcolor="pink"
                     ),
                     ft.Container(
                         content=ft.Text(
@@ -182,14 +178,14 @@ want to master the  skills of professional graphic design""",
                                                 top=3.0,
                                                 width=18.007999420166016,
                                                 height=18.03799819946289,
-                                                bgcolor="#000000",
+                                                bgcolor="pink",
                                             ),
                                             ft.Container(
                                                 left=8.990966796875,
                                                 top=8.990203857421875,
                                                 width=6.005999565124512,
                                                 height=6.015509605407715,
-                                                bgcolor="#000000",
+                                                bgcolor="pink",
                                             ),
                                         ]
                                     ),
