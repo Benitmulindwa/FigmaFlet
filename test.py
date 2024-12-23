@@ -136,6 +136,8 @@ def main(page: ft.Page):
                                 ),
                             ),
                             ft.Container(
+                                left=343 + 79,
+                                top=384 - 94,
                                 width=658,
                                 height=158,
                                 bgcolor="transparent",
