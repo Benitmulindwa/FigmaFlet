@@ -3,13 +3,10 @@ import flet as ft
 
 def main(page: ft.Page):
     page.padding = 0
-    page.scroll = "always"
     page.add(
         ft.Stack(
             [
                 ft.Container(
-                    left=-79,
-                    top=-384,
                     width=1440,
                     height=900,
                     bgcolor="#FFFFFF",
@@ -23,19 +20,15 @@ def main(page: ft.Page):
                                 bgcolor="#000000",
                             ),
                             ft.Container(
-                                left=1,
-                                top=-347,
                                 width=1222,
                                 height=29,
-                                bgcolor="#FFFFFF",
+                                bgcolor="transparent",
                                 content=ft.Stack(
                                     [
                                         ft.Container(
-                                            left=1,
-                                            top=-347,
                                             width=1222,
                                             height=29,
-                                            bgcolor="#FFFFFF",
+                                            bgcolor="transparent",
                                             content=ft.Stack(
                                                 [
                                                     ft.Container(
@@ -46,15 +39,13 @@ def main(page: ft.Page):
                                                         ),
                                                         left=0.0,
                                                         top=0.0,
-                                                        width=125.0,
-                                                        height=29.0,
+                                                        # width=125.0,
+                                                        # height=29.0,
                                                     ),
                                                     ft.Container(
-                                                        left=409,
-                                                        top=-343,
                                                         width=463,
                                                         height=22,
-                                                        bgcolor="#FFFFFF",
+                                                        bgcolor="transparent",
                                                         content=ft.Stack(
                                                             [
                                                                 ft.Container(
@@ -65,8 +56,8 @@ def main(page: ft.Page):
                                                                     ),
                                                                     left=0.0,
                                                                     top=0.0,
-                                                                    width=46.0,
-                                                                    height=22.0,
+                                                                    # width=46.0,
+                                                                    # height=22.0,
                                                                 ),
                                                                 ft.Container(
                                                                     content=ft.Text(
@@ -76,8 +67,8 @@ def main(page: ft.Page):
                                                                     ),
                                                                     left=86.0,
                                                                     top=0.0,
-                                                                    width=57.0,
-                                                                    height=22.0,
+                                                                    # width=57.0,
+                                                                    # height=22.0,
                                                                 ),
                                                                 ft.Container(
                                                                     content=ft.Text(
@@ -87,8 +78,8 @@ def main(page: ft.Page):
                                                                     ),
                                                                     left=183.0,
                                                                     top=0.0,
-                                                                    width=80.0,
-                                                                    height=22.0,
+                                                                    # width=80.0,
+                                                                    # height=22.0,
                                                                 ),
                                                                 ft.Container(
                                                                     content=ft.Text(
@@ -98,8 +89,8 @@ def main(page: ft.Page):
                                                                     ),
                                                                     left=303.0,
                                                                     top=0.0,
-                                                                    width=47.0,
-                                                                    height=22.0,
+                                                                    # width=47.0,
+                                                                    # height=22.0,
                                                                 ),
                                                                 ft.Container(
                                                                     content=ft.Text(
@@ -109,18 +100,16 @@ def main(page: ft.Page):
                                                                     ),
                                                                     left=390.0,
                                                                     top=0.0,
-                                                                    width=73.0,
-                                                                    height=22.0,
+                                                                    # width=73.0,
+                                                                    # height=22.0,
                                                                 ),
                                                             ]
                                                         ),
                                                     ),
                                                     ft.Container(
-                                                        left=1155,
-                                                        top=-342,
                                                         width=68,
                                                         height=20,
-                                                        bgcolor="#FFFFFF",
+                                                        bgcolor="transparent",
                                                         content=ft.Stack(
                                                             [
                                                                 ft.Container(
@@ -147,11 +136,35 @@ def main(page: ft.Page):
                                 ),
                             ),
                             ft.Container(
-                                left=422.0,
-                                top=290.0,
-                                width=658.0,
-                                height=158.0,
-                                bgcolor="pink",
+                                width=658,
+                                height=158,
+                                bgcolor="transparent",
+                                content=ft.Stack(
+                                    [
+                                        ft.Container(
+                                            content=ft.Text(
+                                                value="EDIT LIKE A PRO",
+                                                size=72.0,
+                                                color="#FFFFFF",
+                                            ),
+                                            left=16.0,
+                                            top=0.0,
+                                            # width=627.0,
+                                            # height=88.0,
+                                        ),
+                                        ft.Container(
+                                            content=ft.Text(
+                                                value="and make money",
+                                                size=72.0,
+                                                color="#FFFFFF",
+                                            ),
+                                            left=0.0,
+                                            top=70.0,
+                                            # width=658.0,
+                                            # height=88.0,
+                                        ),
+                                    ]
+                                ),
                             ),
                             ft.Container(
                                 content=ft.Text(
@@ -162,12 +175,10 @@ want to master the  skills of professional graphic design""",
                                 ),
                                 left=501.0,
                                 top=478.0,
-                                width=499.0,
-                                height=44.0,
+                                # width=499.0,
+                                # height=44.0,
                             ),
                             ft.Container(
-                                left=590,
-                                top=168,
                                 width=180,
                                 height=57,
                                 bgcolor="#A8FF35",
@@ -181,8 +192,8 @@ want to master the  skills of professional graphic design""",
                                             ),
                                             left=63.0,
                                             top=18.0,
-                                            width=55.0,
-                                            height=22.0,
+                                            # width=55.0,
+                                            # height=22.0,
                                         ),
                                     ]
                                 ),

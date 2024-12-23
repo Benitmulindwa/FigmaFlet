@@ -117,11 +117,12 @@ class Text(Vector):
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value='{self.characters}', size={self.font_size},color='{self.text_color}'),
+            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}"),
             left={self.x},
             top={self.y},
-            width={self.width},
-            height={self.height},)
+            # width={self.width},
+            # height={self.height},
+            )
         """
 
 
@@ -163,7 +164,7 @@ class Frame(Node):
 
         # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
         # EXPERIMENTAL FEATURE
-        if element_type == "frame":
+        if element_type == "frame" or element_type == "group":
             return Frame(element)
         if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
@@ -186,7 +187,7 @@ class Frame(Node):
             return f"#{r:02X}{g:02X}{b:02X}"
 
         except Exception:
-            return "#FFFFFF"
+            return "transparent"
 
     def size(self) -> tuple:
         """Returns element dimensions as width (int) and height (int)"""
@@ -200,20 +201,13 @@ class Frame(Node):
         x, y = bbox["x"], bbox["y"]
         return int(x), int(y)
 
-    def to_code(self, parent_x=0, parent_y=0):
-        relative_x = self.x - parent_x
-        relative_y = self.y - parent_y
+    def to_code(self):
+
         # Generate code for all child elements
-        children_code = (
-            ",\n".join(child.to_code(self.x, self.y) for child in self.elements)
-            if self.elements
-            else ""
-        )
+        children_code = ",\n".join(child.to_code() for child in self.elements)
         if children_code:
             return f"""
             ft.Container(
-                left={relative_x},
-                top={relative_y},
                 width={self.width},
                 height={self.height},
                 bgcolor="{self.bg_color}",
@@ -1647,7 +1641,7 @@ def main():
         frames.append(frame)
         t = Template(TEMPLATE)
         # print(f.to_code() for f in frames)
-        print("\nCODE:", t.render(element=frame.to_code(TEMPLATE)))
+        print("\nCODE:", t.render(element=frame.to_code()))
 
 
 if __name__ == "__main__":
