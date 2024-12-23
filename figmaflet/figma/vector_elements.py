@@ -271,7 +271,9 @@ def main():
     # canvas_node = Canvas(document_node.children[0])
     # for n in canvas_node.children:
     frame = Frame(test_data)
-    print("\nCODE:", frame.to_code(TEMPLATE))
+    t = Template(TEMPLATE)
+
+    print("\nCODE:", t.render(element=frame.to_code(TEMPLATE)))
 
 
 if __name__ == "__main__":
