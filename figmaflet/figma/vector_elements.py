@@ -120,8 +120,7 @@ class Text(Vector):
             content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}"),
             left={self.x},
             top={self.y},
-            # width={self.width},
-            # height={self.height},
+           
             )
         """
 
@@ -165,6 +164,7 @@ class Frame(Node):
         # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
         # EXPERIMENTAL FEATURE
         if element_type == "frame" or element_type == "group":
+
             return Frame(element)
         if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
@@ -196,18 +196,29 @@ class Frame(Node):
         height = bbox["height"]
         return int(width), int(height)
 
-    def position(self) -> tuple:
+    def position(self):
+        # Returns element coordinates as x (int) and y (int)
         bbox = self.node["absoluteBoundingBox"]
-        x, y = bbox["x"], bbox["y"]
-        return int(x), int(y)
+        x = abs(int(bbox["x"]))
+        y = abs(int(bbox["y"]))
 
-    def to_code(self):
+        return x, y
 
+    def to_code(self, parent_x=0, parent_y=0):
+        relative_x = self.x - parent_x
+        relative_y = self.y - parent_y
+        # print(relative_x, abs(relative_y))
         # Generate code for all child elements
-        children_code = ",\n".join(child.to_code() for child in self.elements)
+        children_code = (
+            ",\n".join(child.to_code() for child in self.elements)
+            if self.children
+            else ""
+        )
         if children_code:
             return f"""
             ft.Container(
+                left={self.x},
+                top={self.y}, 
                 width={self.width},
                 height={self.height},
                 bgcolor="{self.bg_color}",
