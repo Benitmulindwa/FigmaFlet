@@ -207,7 +207,7 @@ class Frame(Node):
     def to_code(self, parent_x=0, parent_y=0):
         relative_x = self.x - parent_x
         relative_y = self.y - parent_y
-        # print(relative_x, abs(relative_y))
+        print(self.x, parent_x)
         # Generate code for all child elements
         children_code = (
             ",\n".join(child.to_code() for child in self.elements)
@@ -217,8 +217,8 @@ class Frame(Node):
         if children_code:
             return f"""
             ft.Container(
-                left={self.x},
-                top={self.y}, 
+                left={relative_x},
+                top={relative_y}, 
                 width={self.width},
                 height={self.height},
                 bgcolor="{self.bg_color}",
@@ -1652,7 +1652,7 @@ def main():
         frames.append(frame)
         t = Template(TEMPLATE)
         # print(f.to_code() for f in frames)
-        print("\nCODE:", t.render(element=frame.to_code()))
+        print("\nCODE:", t.render(element=frame.to_code(frame.x, frame.y)))
 
 
 if __name__ == "__main__":
