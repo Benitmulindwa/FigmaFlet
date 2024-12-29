@@ -1,5 +1,5 @@
 from jinja2 import Template
-from figma.template import TEMPLATE
+from figmaflet.template import TEMPLATE
 from figma.frame import Frame
 from figma import endpoints
 
