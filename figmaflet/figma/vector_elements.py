@@ -120,8 +120,6 @@ class Text(Vector):
             content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}"),
             left={self.x},
             top={self.y},
-            # width={self.width},
-            # height={self.height},
             )
         """
 
@@ -158,14 +156,11 @@ class Frame(Node):
         self.elements = [
             self.create_element(child) for child in self.children if Node(child).visible
         ]
-        # print(self.elements[0].color)
 
     def create_element(self, element):
         element_name = element["name"].strip().lower()
         element_type = element["type"].strip().lower()
 
-        # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
-        # EXPERIMENTAL FEATURE
         if element_type == "frame" or element_type == "group":
             return Frame(element, self)
         if element_name == "rectangle" or element_type == "rectangle":
@@ -177,7 +172,6 @@ class Frame(Node):
 
     @property
     def children(self):
-        # TODO: Convert nodes to Node objects before returning a list of them.
         return self.node.get("children")
 
     def color(self) -> str:
@@ -204,6 +198,7 @@ class Frame(Node):
         x = bbox["x"]
         y = bbox["y"]
 
+        #
         if self.parent is None:
             x = 0
             y = 0
@@ -211,13 +206,11 @@ class Frame(Node):
             parent_bbox = self.parent.node["absoluteBoundingBox"]
             x -= parent_bbox["x"]
             y -= parent_bbox["y"]
-        print(x, y)
-        return x, y
 
-    def to_code(self, parent_x=0, parent_y=0):
-        relative_x = self.x - parent_x
-        relative_y = self.y - parent_y
-        # print(self.x, self.y)
+        return int(x), int(y)
+
+    def to_code(self):
+
         # Generate code for all child elements
         children_code = ",\n".join(child.to_code() for child in self.elements)
         if children_code:
