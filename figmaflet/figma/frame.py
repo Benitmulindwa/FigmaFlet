@@ -1,6 +1,6 @@
-from figma.node import Node
-from figma.vector_elements import Rectangle, Text, UnknownElement
-from figma.template import TEMPLATE
+from node import Node
+from vector_elements import Rectangle, Text, UnknownElement
+from template import TEMPLATE
 from jinja2 import Template
 
 
