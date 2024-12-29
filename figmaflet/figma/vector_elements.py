@@ -120,7 +120,8 @@ class Text(Vector):
             content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}"),
             left={self.x},
             top={self.y},
-           
+            # width={self.width},
+            # height={self.height},
             )
         """
 
@@ -143,9 +144,11 @@ ft.Container(
 
 
 class Frame(Node):
-    def __init__(self, node):
+    def __init__(self, node, parent=None):
         super().__init__(node)
 
+        self.parent = parent
+        # print(self.parent)
         self.width, self.height = self.size()
         self.x, self.y = self.position()
         self.bg_color = self.color()
@@ -164,8 +167,7 @@ class Frame(Node):
         # print("Creating Element " f"{{ name: {element_name}, type: {element_type} }}")
         # EXPERIMENTAL FEATURE
         if element_type == "frame" or element_type == "group":
-
-            return Frame(element)
+            return Frame(element, self)
         if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
         if element_type == "text":
@@ -199,26 +201,30 @@ class Frame(Node):
     def position(self):
         # Returns element coordinates as x (int) and y (int)
         bbox = self.node["absoluteBoundingBox"]
-        x = abs(int(bbox["x"]))
-        y = abs(int(bbox["y"]))
+        x = bbox["x"]
+        y = bbox["y"]
 
+        if self.parent is None:
+            x = 0
+            y = 0
+        else:
+            parent_bbox = self.parent.node["absoluteBoundingBox"]
+            x -= parent_bbox["x"]
+            y -= parent_bbox["y"]
+        print(x, y)
         return x, y
 
     def to_code(self, parent_x=0, parent_y=0):
         relative_x = self.x - parent_x
         relative_y = self.y - parent_y
-        print(self.x, parent_x)
+        # print(self.x, self.y)
         # Generate code for all child elements
-        children_code = (
-            ",\n".join(child.to_code() for child in self.elements)
-            if self.children
-            else ""
-        )
+        children_code = ",\n".join(child.to_code() for child in self.elements)
         if children_code:
             return f"""
             ft.Container(
-                left={relative_x},
-                top={relative_y}, 
+                left={self.x},
+                top={self.y},
                 width={self.width},
                 height={self.height},
                 bgcolor="{self.bg_color}",
@@ -1652,7 +1658,7 @@ def main():
         frames.append(frame)
         t = Template(TEMPLATE)
         # print(f.to_code() for f in frames)
-        print("\nCODE:", t.render(element=frame.to_code(frame.x, frame.y)))
+        print("\nCODE:", t.render(elements=frame.to_code()))
 
 
 if __name__ == "__main__":

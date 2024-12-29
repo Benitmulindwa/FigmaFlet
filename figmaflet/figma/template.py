@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.padding=0
     page.add(
        ft.Stack([
-        {{ element }}
+        {{ elements }}
         ])
     )
 ft.app(target=main)
