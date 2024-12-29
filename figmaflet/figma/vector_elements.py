@@ -153,13 +153,13 @@ class Frame(Node):
         super().__init__(node)
 
         self.parent = parent
-        # print(self.parent)
+
         self.width, self.height = self.size()
         self.x, self.y = self.position()
         self.bg_color = self.color()
 
         self.border_radius = self.get_border_radius()
-
+        self.shadow = self.get_shadow()
         # self.counter = {}
 
         self.elements = [
@@ -224,7 +224,42 @@ class Frame(Node):
         else:
             return 0
 
+    def get_shadow(self) -> dict:
+        """Returns the shadow properties as a dictionary."""
+        try:
+            for effect in self.node.get("effects", []):
+                if effect["type"] == "DROP_SHADOW" and effect["visible"]:
+                    color = effect["color"]
+                    r, g, b, a = [int(color.get(k, 0) * 255) for k in "rgba"]
+                    shadow_color = f"#{r:02X}{g:02X}{b:02X}"
+                    offset = effect["offset"]
+                    blur = effect.get("radius", 0)
+                    spread = effect.get("spread", 0)  # Optional
+                    return {
+                        "color": shadow_color,
+                        "offset_x": int(offset["x"]),
+                        "offset_y": int(offset["y"]),
+                        "blur": int(blur),
+                        "spread": int(spread),
+                    }
+        except KeyError:
+            pass
+        return None  # No shadow
+
     def to_code(self):
+
+        # Convert shadow to Flet-compatible string
+        shadow_str = ""
+        if self.shadow:
+            shadow = self.shadow
+            shadow_str = f"""
+            shadow=ft.BoxShadow(
+                spread_radius={shadow["spread"]//5},
+                blur_radius={shadow["blur"]},
+                offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
+                color="{shadow["color"]}"
+            ),
+            """
 
         # Generate code for all child elements
         children_code = ",\n".join(child.to_code() for child in self.elements)
@@ -236,6 +271,7 @@ class Frame(Node):
                 width={self.width},
                 height={self.height},
                 border_radius={self.border_radius},
+                {shadow_str}
                 bgcolor="{self.bg_color}",
                 content=ft.Stack([
                     {children_code},

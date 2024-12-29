@@ -428,6 +428,12 @@ want to master the  skills of professional graphic design""",
                                 width=180,
                                 height=57,
                                 border_radius=40.0,
+                                shadow=ft.BoxShadow(
+                                    spread_radius=0,
+                                    blur_radius=25,
+                                    offset=ft.Offset(0, 0),
+                                    color="#A8FF35",
+                                ),
                                 bgcolor="#A8FF35",
                                 content=ft.Stack(
                                     [
