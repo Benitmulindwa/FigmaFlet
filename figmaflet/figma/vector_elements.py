@@ -79,6 +79,9 @@ class Text(Vector):
         self.font, self.font_size, self.font_weight = self.font_property()
         self.text = self.characters.replace("\n", "\\n")
 
+        self.text_align = self.style["textAlignHorizontal"]
+        print(self.text_align)
+
     @property
     def characters(self) -> str:
         string: str = self.node.get("characters")
@@ -95,12 +98,10 @@ class Text(Vector):
 
     @property
     def style(self):
-        # TODO: Native conversion
         return self.node.get("style")
 
     @property
     def style_override_table(self):
-        # TODO: Native conversion
         return self.node.get("styleOverrideTable")
 
     def font_property(self):
@@ -109,18 +110,21 @@ class Text(Vector):
         font_name = style.get("fontPostScriptName")
         if font_name is None:
             font_name = style["fontFamily"]
+
+        # TEXT- Weight
         font_weight = style.get("fontWeight")
         if font_weight:
             font_weight = f"w{font_weight}"
 
         font_name = font_name.replace("-", " ")
         font_size = style["fontSize"]
+
         return font_name, font_size, font_weight
 
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}"),
+            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",text_align=ft.TextAlign.{self.text_align}),
             left={self.x},
             top={self.y},
             )
