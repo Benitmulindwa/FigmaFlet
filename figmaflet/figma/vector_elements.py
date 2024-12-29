@@ -65,6 +65,7 @@ class Rectangle(Vector):
             top={self.y},
             width={self.width},
             height={self.height},
+            border_radius={self.rectangle_corner_radii},
             bgcolor="{self.bg_color}",)
 """
 
@@ -80,7 +81,6 @@ class Text(Vector):
         self.text = self.characters.replace("\n", "\\n")
 
         self.text_align = self.style["textAlignHorizontal"]
-        print(self.text_align)
 
     @property
     def characters(self) -> str:
