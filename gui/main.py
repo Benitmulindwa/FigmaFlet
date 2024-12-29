@@ -1,4 +1,5 @@
 import flet as ft
+from figmaflet.generateUI import UI
 
 
 def submit_data(e): ...
@@ -11,6 +12,7 @@ path = ft.TextField()
 
 def main(page: ft.Page):
     page.theme_mode = "light"
+    page.width = 600
     page.horizontal_alignment = "center"
     page.add(
         ft.Text("FigmaFlet", size=30, weight=ft.FontWeight.BOLD),
