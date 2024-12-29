@@ -76,7 +76,7 @@ class Text(Vector):
         self.width, self.height = self.size()
 
         self.text_color = self.color()
-        self.font, self.font_size = self.font_property()
+        self.font, self.font_size, self.font_weight = self.font_property()
         self.text = self.characters.replace("\n", "\\n")
 
     @property
@@ -109,15 +109,18 @@ class Text(Vector):
         font_name = style.get("fontPostScriptName")
         if font_name is None:
             font_name = style["fontFamily"]
+        font_weight = style.get("fontWeight")
+        if font_weight:
+            font_weight = f"w{font_weight}"
 
         font_name = font_name.replace("-", " ")
         font_size = style["fontSize"]
-        return font_name, font_size
+        return font_name, font_size, font_weight
 
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}"),
+            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}"),
             left={self.x},
             top={self.y},
             )
