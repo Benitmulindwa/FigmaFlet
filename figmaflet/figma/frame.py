@@ -1,6 +1,6 @@
-from node import Node
-from vector_elements import Rectangle, Text, UnknownElement
-from template import TEMPLATE
+from .node import Node
+from .vector_elements import Rectangle, Text, UnknownElement
+from .template import TEMPLATE
 from jinja2 import Template
 
 
@@ -1559,19 +1559,19 @@ test_data = {
 }
 
 
-def main():
-    mynode = Node(test_data)
-    # document_node = Document(mynode)
-    # print(document_node.children)
-    # canvas_node = Canvas(document_node.children[0])
-    frames = []
-    for f in test_data["document"]["children"][0]["children"]:
-        frame = Frame(f)
-        frames.append(frame)
-        t = Template(TEMPLATE)
-        # print(f.to_code() for f in frames)
-        print("\nCODE:", t.render(elements=frame.to_code()))
+# def main():
+#     mynode = Node(test_data)
+#     # document_node = Document(mynode)
+#     # print(document_node.children)
+#     # canvas_node = Canvas(document_node.children[0])
+#     frames = []
+#     for f in test_data["document"]["children"][0]["children"]:
+#         frame = Frame(f)
+#         frames.append(frame)
+#         t = Template(TEMPLATE)
+#         # print(f.to_code() for f in frames)
+#         print("\nCODE:", t.render(elements=frame.to_code()))
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
