@@ -237,6 +237,7 @@ def main(page: ft.Page):
                     top=0,
                     width=1440,
                     height=900,
+                    border_radius=0,
                     bgcolor="#FFFFFF",
                     content=ft.Stack(
                         [
@@ -252,6 +253,7 @@ def main(page: ft.Page):
                                 top=37,
                                 width=1222,
                                 height=29,
+                                border_radius=0,
                                 bgcolor="transparent",
                                 content=ft.Stack(
                                     [
@@ -260,6 +262,7 @@ def main(page: ft.Page):
                                             top=0,
                                             width=1222,
                                             height=29,
+                                            border_radius=0,
                                             bgcolor="transparent",
                                             content=ft.Stack(
                                                 [
@@ -279,6 +282,7 @@ def main(page: ft.Page):
                                                         top=3,
                                                         width=463,
                                                         height=22,
+                                                        border_radius=0,
                                                         bgcolor="transparent",
                                                         content=ft.Stack(
                                                             [
@@ -345,6 +349,7 @@ def main(page: ft.Page):
                                                         top=4,
                                                         width=68,
                                                         height=20,
+                                                        border_radius=0,
                                                         bgcolor="transparent",
                                                         content=ft.Stack(
                                                             [
@@ -376,6 +381,7 @@ def main(page: ft.Page):
                                 top=290,
                                 width=658,
                                 height=158,
+                                border_radius=0,
                                 bgcolor="transparent",
                                 content=ft.Stack(
                                     [
@@ -421,6 +427,7 @@ want to master the  skills of professional graphic design""",
                                 top=552,
                                 width=180,
                                 height=57,
+                                border_radius=40.0,
                                 bgcolor="#A8FF35",
                                 content=ft.Stack(
                                     [

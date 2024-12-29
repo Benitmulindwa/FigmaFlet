@@ -158,7 +158,9 @@ class Frame(Node):
         self.x, self.y = self.position()
         self.bg_color = self.color()
 
-        self.counter = {}
+        self.border_radius = self.get_border_radius()
+
+        # self.counter = {}
 
         self.elements = [
             self.create_element(child) for child in self.children if Node(child).visible
@@ -216,6 +218,12 @@ class Frame(Node):
 
         return int(x), int(y)
 
+    def get_border_radius(self) -> int:
+        if "cornerRadius" in self.node:
+            return self.node["cornerRadius"]
+        else:
+            return 0
+
     def to_code(self):
 
         # Generate code for all child elements
@@ -227,6 +235,7 @@ class Frame(Node):
                 top={self.y},
                 width={self.width},
                 height={self.height},
+                border_radius={self.border_radius},
                 bgcolor="{self.bg_color}",
                 content=ft.Stack([
                     {children_code},
