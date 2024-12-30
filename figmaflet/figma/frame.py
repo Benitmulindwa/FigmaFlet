@@ -118,8 +118,8 @@ class Frame(Node):
             shadow = self.shadow
             shadow_str = f"""
             shadow=ft.BoxShadow(
-                spread_radius={shadow["spread"]//5},
-                blur_radius={shadow["blur"]},
+                spread_radius={shadow["spread"]},
+                blur_radius={shadow["blur"]//5},
                 offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
                 color="{shadow["color"]}"
             ),

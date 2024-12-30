@@ -23,6 +23,7 @@ def main(page: ft.Page):
                                 top=0.0,
                                 width=1440.0,
                                 height=900.0,
+                                border_radius=None,
                                 bgcolor="#000000",
                             ),
                             ft.Container(
@@ -189,7 +190,7 @@ def main(page: ft.Page):
                             ),
                             ft.Container(
                                 content=ft.Text(
-                                    value="""This is an intensive program for those who
+                                    value="""This is an intensive program for those who 
 want to master the  skills of professional graphic design""",
                                     size=18.0,
                                     color="#FFFFFF",
@@ -207,7 +208,7 @@ want to master the  skills of professional graphic design""",
                                 border_radius=40.0,
                                 shadow=ft.BoxShadow(
                                     spread_radius=0,
-                                    blur_radius=25,
+                                    blur_radius=5,
                                     offset=ft.Offset(0, 0),
                                     color="#A8FF35",
                                 ),
