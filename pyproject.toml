@@ -12,7 +12,7 @@ license = {text = "Apache-2.0 license"}
 authors = [
     {name = "Benit Mulindwa", email = "mulindwabenit@gmail.com"}
 ]
-dependencies = ["flet","jinja2","requests"]
+dependencies = ["jinja2","requests"]
 
 classifiers = [
     "Programming Language :: Python :: 3",
