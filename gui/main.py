@@ -3,13 +3,7 @@ import os
 import flet as ft
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent.parent) + "\\figmaflet")
-try:
-    from figmaflet.generateUI import UI
-except ModuleNotFoundError:
-    raise RuntimeError("Couldn't add FigmaFlet to the PATH.")
-
-# print(str(Path(__file__).resolve().parent.parent) + "\\figmaflet")
+from figmaflet.generateUI import UI
 
 
 def submit_data(e): ...
