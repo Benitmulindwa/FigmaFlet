@@ -76,7 +76,10 @@ class Text(Vector):
 
         self.text_color = self.color()
         self.font, self.font_size, self.font_weight = self.font_property()
-        self.text = self.characters.replace("\n", "\\n")
+        if "\n" in self.characters:
+            self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
+        else:
+            self.text = f'"{self.characters}"'
 
         self.text_align = self.style["textAlignHorizontal"]
 
@@ -122,7 +125,7 @@ class Text(Vector):
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value="{self.characters}", size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",text_align=ft.TextAlign.{self.text_align}),
+            content=ft.Text(value={self.text}, size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",text_align=ft.TextAlign.{self.text_align}),
             left={self.x},
             top={self.y},
             )

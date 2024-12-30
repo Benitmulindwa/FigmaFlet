@@ -26,7 +26,7 @@ class UI:
 
     def generate(self):
         code = self.to_code()
-        self.local_path.joinpath("main1.py").write_text(code, encoding="UTF-8")
+        self.local_path.joinpath("main.py").write_text(code, encoding="UTF-8")
 
 
 # Code Example
