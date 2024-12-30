@@ -1,5 +1,15 @@
+import sys
+import os
 import flet as ft
-from figmaflet.generateUI import UI
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parent.parent) + "\\figmaflet")
+try:
+    from figmaflet.generateUI import UI
+except ModuleNotFoundError:
+    raise RuntimeError("Couldn't add FigmaFlet to the PATH.")
+
+# print(str(Path(__file__).resolve().parent.parent) + "\\figmaflet")
 
 
 def submit_data(e): ...
@@ -12,7 +22,7 @@ path = ft.TextField()
 
 def main(page: ft.Page):
     page.theme_mode = "light"
-    page.width = 600
+    page.window.width = 600
     page.horizontal_alignment = "center"
     page.add(
         ft.Text("FigmaFlet", size=30, weight=ft.FontWeight.BOLD),
