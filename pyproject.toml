@@ -25,5 +25,8 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/Benitmulindwa/figmaflet"
 
+[project.scripts]
+figmaflet = "figmaflet.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["figmaflet"]
