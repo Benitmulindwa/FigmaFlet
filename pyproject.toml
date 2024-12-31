@@ -14,6 +14,8 @@ authors = [
 ]
 dependencies = ["jinja2","requests"]
 
+keywords = ["flet", "drag-and-drop", "figma", "ui", "easy"]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache-2.0 License",
