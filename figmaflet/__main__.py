@@ -1,6 +1,14 @@
+import re
 import argparse
 from pathlib import Path
 from figmaflet.generateUI import UI
+
+
+def extract_file_key(url):
+    match = re.search(r"/design/([a-zA-Z0-9]+)", url)
+    if match:
+        return match.group(1)
+    return None
 
 
 def main():
@@ -13,7 +21,11 @@ def main():
 
     args = parser.parse_args()
 
-    ui = UI(token=args.apikey, file_key=args.fileurl, local_path=Path(args.output))
+    ui = UI(
+        token=args.apikey,
+        file_key=args.fileurl,
+        local_path=Path(extract_file_key(args.output)),
+    )
     ui.generate()
 
     print(f"UI code has been successfully generated and saved to {args.output}.")
