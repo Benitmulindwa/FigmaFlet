@@ -67,6 +67,8 @@ Provide the Figma file URL containing your design.
 - **Buttons** + **Events handling**(eg: on_hover)
 - **Fonts support**
 - **Style Improvements**: better handling of **shadows**, **gradients** and other advanced figma styles
+- **UI Responsivity**
+- **Flexibiliy**: the generated code must be more flexible and easy to edit
 - **Animations**
 
 
