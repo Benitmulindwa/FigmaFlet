@@ -17,10 +17,9 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
    git clone https://github.com/Benitmulindwa/figmaflet.git
    cd figmaflet
 2. Install the dependencies:
-bash
-Copy code
-pip install .
-
+```bash
+pip install -r requirements.txt
+```
 ### From PyPI
 Coming soon! Stay tuned for our PyPI release.
 ```
@@ -36,10 +35,10 @@ python -m figmaflet.gui
 ```
 ![figmaflet_gui](https://github.com/user-attachments/assets/1e6a79bd-3bae-4378-acc2-9c8664a1fd1f)
 ### How It Works
-Input your API key and file URL.
-FigmaFlet fetches the design data using Figma's API.
-The tool processes the design elements and generates Flet-compatible Python code.
-The generated code is saved to your specified output path.
+- Input your API key, file URL and output path.
+- FigmaFlet fetches the design data using Figma's API.
+- The tool processes the design elements and generates Flet-compatible Python code.
+- The generated code is saved to your specified output path.
 
 2. Command-Line Interface (CLI)
 Once installed, use the CLI to generate Flet code:
@@ -50,7 +49,7 @@ python -m figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_
 
 
 Figma API Key
-You will need your Figma API key to access design files. Generate your key by visiting your Figma account settings.
+You will need your Figma API key to access design files. Generate your key by visiting your [Figma](https://figma.com) account settings.
 
 
 File URL
@@ -62,18 +61,29 @@ Provide the Figma file URL containing your design.
 
 ### Figmaflet output
 ![figmaflet_5th_try](https://github.com/user-attachments/assets/15727ba1-b619-4e5f-a4be-f410231f9658)
+## Upcoming Features
+- **Images** and **Icons**
+- **TextFields**
+- **Buttons** + **Events handling**(eg: on_hover)
+- **Fonts support**
+- **Style Improvements**: better handling of **shadows**, **gradients** and other advanced figma styles
+- **Animations**
+
 
 ## Contributing
-We welcome contributions to FigmaFlet! To contribute:
+Contributions to FigmaFlet are highly welcomed! 
 
-Fork the repository.
-Create a feature branch.
-Submit a pull request with a detailed explanation of your changes.
+#### To contribute:
+
+**- Fork the repository.**
+**- Create a feature branch.**
+**- Submit a pull request with a detailed explanation of your changes.**
 ## License
 This project is licensed under the Apache-2.0 License. See the LICENSE file for details.
 
-## Authors
+## Author
 Benit Mulindwa - GitHub
+
 ### Acknowledgments
 Special thanks to the tkinterdesigner and Figma communities for their support and inspiration.
 
