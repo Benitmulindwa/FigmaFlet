@@ -60,7 +60,7 @@ def main(page: ft.Page):
             )
         except Exception as ex:
             page.open(
-                ft.AlertDialog(content=ft.Text(f"An error occurred: {ex}", coloe="red"))
+                ft.AlertDialog(content=ft.Text(f"An error occurred: {ex}", color="red"))
             )
 
     page.add(
