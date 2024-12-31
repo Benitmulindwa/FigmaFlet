@@ -8,18 +8,6 @@ from figmaflet.generateUI import UI
 # TODO: - Redesign the UI, make it more beautiful and add a logo
 
 
-# Extract file key from figma URL
-def extract_file_key(url):
-    """Extracts the file key from a Figma URL."""
-    match = re.search(r"/file/([a-zA-Z0-9]+)", url)
-    if match:
-        return match.group(1)
-    return None
-
-
-# Example usage
-
-
 apikey = ft.TextField(label="API Key", border_radius=30, bgcolor="grey100")
 file_url = ft.TextField(label="File URL", border_radius=30, bgcolor="grey100")
 path = ft.TextField(label="Output PATH", border_radius=30, bgcolor="grey100")
@@ -31,6 +19,14 @@ def main(page: ft.Page):
     page.window.width = 600
     page.spacing = 30
     page.horizontal_alignment = "center"
+
+    # Extract file key from figma URL
+    def extract_file_key(url):
+        """Extracts the file key from a Figma URL."""
+        match = re.search(r"/design/([a-zA-Z0-9]+)", url)
+        if match:
+            return match.group(1)
+        return None
 
     def submit_data(e):
         apikey_value = apikey.value.strip()
