@@ -27,19 +27,3 @@ class UI:
     def generate(self):
         code = self.to_code()
         self.local_path.joinpath("main.py").write_text(code, encoding="UTF-8")
-
-
-# Code Example
-# def main():
-
-#     ui = UI(
-#         token="FIGMA_API",
-#         file_key="6EbpTUSXvrpqZb2WrtihV1",
-#         local_path=Path("d:/projects/figmaflet/gui"),
-#     )
-#     print(ui.to_code())
-#     ui.generate()
-
-
-# if __name__ == "__main__":
-#     main()

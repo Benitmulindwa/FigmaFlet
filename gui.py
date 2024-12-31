@@ -9,7 +9,7 @@ from figmaflet.generateUI import UI
 
 # Extract file key from figma URL
 def extract_file_key(url):
-    """Extracts the file key from a Figma URL."""
+
     match = re.search(r"/design/([a-zA-Z0-9]+)", url)
     if match:
         return match.group(1)
