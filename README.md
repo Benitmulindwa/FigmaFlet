@@ -21,7 +21,7 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 pip install -r requirements.txt
 ```
 ### From PyPI
-Coming soon! Stay tuned for our PyPI release.
+
 ```
 pip install figmaflet
 ```
