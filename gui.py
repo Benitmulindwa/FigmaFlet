@@ -1,25 +1,44 @@
-import sys
+import re
 import os
 import flet as ft
 from pathlib import Path
-
 from figmaflet.generateUI import UI
 
 
-apikey = ft.TextField(hint_text="Enter your Figma API Key")
-file_url = ft.TextField(hint_text="Enter the Figma file URL(project URL)")
-path = ft.TextField(hint_text="Enter the output file path")
+# TODO: - Redesign the UI, make it more beautiful and add a logo
+
+
+# Extract file key from figma URL
+def extract_file_key(url):
+    """Extracts the file key from a Figma URL."""
+    match = re.search(r"/file/([a-zA-Z0-9]+)", url)
+    if match:
+        return match.group(1)
+    return None
+
+
+# Example usage
+
+
+apikey = ft.TextField(label="API Key", border_radius=30, bgcolor="grey100")
+file_url = ft.TextField(label="File URL", border_radius=30, bgcolor="grey100")
+path = ft.TextField(label="Output PATH", border_radius=30, bgcolor="grey100")
 
 
 def main(page: ft.Page):
+    page.title = "FigmaFlet"
     page.theme_mode = "light"
     page.window.width = 600
+    page.spacing = 30
     page.horizontal_alignment = "center"
 
     def submit_data(e):
         apikey_value = apikey.value.strip()
-        file_url_value = file_url.value.strip()
+        url_value = file_url.value.strip()
         path_value = path.value.strip()
+
+        # Extract the file key from the provided URL
+        file_url_value = extract_file_key(url_value)
 
         # Validate input
         if not apikey_value or not file_url_value or not path_value:
@@ -36,16 +55,40 @@ def main(page: ft.Page):
         try:
             ui_generator = UI(apikey_value, file_url_value, output_path)
             ui_generator.generate()
-            page.open(ft.AlertDialog(content=ft.Text("UI generated successfully!")))
+            page.open(
+                ft.AlertDialog(
+                    content=ft.Text(
+                        "UI generated successfully!", size=20, color="green"
+                    )
+                )
+            )
         except Exception as ex:
-            page.open(ft.AlertDialog(content=ft.Text(f"An error occurred: {ex}")))
+            page.open(
+                ft.AlertDialog(content=ft.Text(f"An error occurred: {ex}", coloe="red"))
+            )
 
     page.add(
-        ft.Text("FigmaFlet", size=30, weight=ft.FontWeight.BOLD),
-        ft.Column([ft.Text("API Key:"), apikey]),
-        ft.Column([ft.Text("File url:"), file_url]),
-        ft.Column([ft.Text("File PATH:"), path]),
-        ft.TextButton("GENERATE", ft.Icons.UPLOAD, on_click=submit_data),
+        ft.Column(
+            [
+                ft.Text("FigmaFlet", size=30, weight=ft.FontWeight.BOLD),
+                ft.Text(
+                    "Generate Flet UIs from Figma Designs",
+                    size=18,
+                    weight=ft.FontWeight.W_500,
+                ),
+            ],
+            horizontal_alignment="center",
+        ),
+        ft.Column(
+            [
+                apikey,
+                file_url,
+                path,
+                ft.ElevatedButton("GENERATE", ft.Icons.UPLOAD, on_click=submit_data),
+            ],
+            horizontal_alignment="center",
+            spacing=25,
+        ),
     )
 
 
