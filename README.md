@@ -75,9 +75,9 @@ Contributions to FigmaFlet are highly welcomed!
 
 #### To contribute:
 
-**- Fork the repository.**
-**- Create a feature branch.**
-**- Submit a pull request with a detailed explanation of your changes.**
+- **Fork the repository.**
+- **Create a feature branch.**
+- **Submit a pull request with a detailed explanation of your changes.**
 ## License
 This project is licensed under the Apache-2.0 License. See the LICENSE file for details.
 
