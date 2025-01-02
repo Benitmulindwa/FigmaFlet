@@ -7,7 +7,7 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 - **Figma Integration**: Fetch designs directly from Figma using the file URL and API token.
 - **Automatic Code Generation**: Generate Flet UI code from your designs with minimal manual effort.
 - **Multi-line Text Handling**: Supports multi-line text elements seamlessly.
-- **Graphical Interface**: Provides an intuitive GUI for entering API keys, file URLs, and output paths.
+- **Graphical Interface**: Provides an intuitive GUI for entering API tokens, file URLs, and output paths.
 
 ## Installation
 
