@@ -13,9 +13,10 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 
 ### From Source
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Benitmulindwa/figmaflet.git
-   cd figmaflet
+```bash
+git clone https://github.com/Benitmulindwa/figmaflet.git
+cd figmaflet
+```
 2. Install the dependencies:
 ```bash
 pip install -r requirements.txt
