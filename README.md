@@ -4,7 +4,7 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 
 ## Features
 
-- **Figma Integration**: Fetch designs directly from Figma using the file URL and API key.
+- **Figma Integration**: Fetch designs directly from Figma using the file URL and API token.
 - **Automatic Code Generation**: Generate Flet UI code from your designs with minimal manual effort.
 - **Multi-line Text Handling**: Supports multi-line text elements seamlessly.
 - **Graphical Interface**: Provides an intuitive GUI for entering API keys, file URLs, and output paths.
@@ -28,15 +28,15 @@ pip install figmaflet
 
 ## Usage
 
-1. Launch the GUI to interactively input your API key, file URL, and output path:
+1. Launch the GUI to interactively input your API token, file URL, and output path:
 
 ```bash
 python -m figmaflet.gui
 ```
 ![figmaflet_gui](https://github.com/user-attachments/assets/1e6a79bd-3bae-4378-acc2-9c8664a1fd1f)
 ### How It Works
-- Input your API key, file URL and output path.
-- FigmaFlet fetches the design data using Figma's API.
+- Input your API token, file URL and output path.
+- FigmaFlet fetches the design data using Figma's API token.
 - The tool processes the design elements and generates Flet-compatible Python code.
 - The generated code is saved to your specified output path.
 
@@ -84,7 +84,7 @@ Contributions to FigmaFlet are highly welcomed!
 This project is licensed under the Apache-2.0 License. See the LICENSE file for details.
 
 ## Author
-Benit Mulindwa - GitHub
+Benit Mulindwa - [GitHub](https://github.com/benitmulindwa)
 
 ### Acknowledgments
 Special thanks to the tkinterdesigner and Figma communities for their support and inspiration.
