@@ -24,7 +24,7 @@ def main():
     ui = UI(
         token=args.apikey,
         file_key=extract_file_key(args.fileurl),
-        local_path=Path(extract_file_key(args.output)),
+        local_path=Path(args.output),
     )
     ui.generate()
 
