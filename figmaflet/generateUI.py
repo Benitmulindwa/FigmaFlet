@@ -1,7 +1,7 @@
 from jinja2 import Template
-from template import TEMPLATE
-from figma.frame import Frame
-from figma import endpoints
+from figmaflet.template import TEMPLATE
+from figmaflet.figma.frame import Frame
+from figmaflet.figma import endpoints
 from pathlib import Path
 
 

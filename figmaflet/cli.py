@@ -23,7 +23,7 @@ def main():
 
     ui = UI(
         token=args.apikey,
-        file_key=args.fileurl,
+        file_key=extract_file_key(args.fileurl),
         local_path=Path(extract_file_key(args.output)),
     )
     ui.generate()
