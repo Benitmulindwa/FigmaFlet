@@ -27,7 +27,6 @@ Homepage = "https://github.com/Benitmulindwa/figmaflet"
 
 [project.scripts]
 figmaflet = "figmaflet.cli:main"
-figmaflet.gui="figmaflet.main:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
