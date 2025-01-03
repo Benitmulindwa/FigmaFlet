@@ -16,7 +16,7 @@ def extract_file_key(url):
     return None
 
 
-apikey = ft.TextField(label="API Key", border_radius=30, bgcolor="grey100")
+apikey = ft.TextField(label="API Token", border_radius=30, bgcolor="grey100")
 file_url = ft.TextField(label="File URL", border_radius=30, bgcolor="grey100")
 path = ft.TextField(label="Output PATH", border_radius=30, bgcolor="grey100")
 
