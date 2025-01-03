@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "figmaflet"
-version = "0.0.1"
+version = "0.0.2"
 description = "A tool to generate Flet UI from Figma designs."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -26,7 +26,7 @@ classifiers = [
 Homepage = "https://github.com/Benitmulindwa/figmaflet"
 
 [project.scripts]
-figmaflet = "figmaflet.__main__:main"
+figmaflet = "figmaflet.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["figmaflet"]
+where = ["."]
