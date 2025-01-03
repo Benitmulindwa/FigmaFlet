@@ -54,7 +54,7 @@ You will need your Figma API token to access design files. Generate your key by 
 
 
 File URL
-Provide the Figma file URL containing your design; This is your figma projdect's URL.
+Provide the Figma file URL containing your design; This is your figma project's URL.
 
 ## Results:
 ### Figma design
