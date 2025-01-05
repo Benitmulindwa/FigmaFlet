@@ -34,7 +34,7 @@ pip install figmaflet
 ```bash
 python -m figmaflet.gui
 ```
-![figmaflet_gui](https://github.com/user-attachments/assets/1e6a79bd-3bae-4378-acc2-9c8664a1fd1f)
+![figmaflet_gui](https://github.com/user-attachments/assets/10ed6ffa-9deb-4e7d-94b2-11489d4ebf23)
 ### How It Works
 - Input your API token, file URL and output path.
 - FigmaFlet fetches the design data using Figma's API token.
@@ -50,14 +50,15 @@ python -m figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_
 
 
 Figma API Key
-You will need your Figma API key to access design files. Generate your key by visiting your [Figma](https://figma.com) account settings.
+You will need your Figma API token to access design files. Generate your key by visiting your [Figma](https://figma.com) account settings.
 
 
 File URL
-Provide the Figma file URL containing your design.
+Provide the Figma file URL containing your design; This is your figma project's URL.
 
 ## Results:
 ### Figma design
+
 ![figmaOriginal](https://github.com/user-attachments/assets/054e5b07-aece-45ba-812b-4b6dceaaeb86)
 
 ### Figmaflet output
