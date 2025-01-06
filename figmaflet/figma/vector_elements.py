@@ -38,8 +38,6 @@ class Vector(Node):
 
 
 # Handled Figma Components
-
-
 class Rectangle(Vector):
     def __init__(self, node, frame):
         super().__init__(node)
@@ -130,6 +128,25 @@ class Text(Vector):
             top={self.y},
             )
         """
+
+
+class Image(Vector):
+    def __init__(self, node, frame, image_path, *, id_):
+        super().__init__(node)
+
+        self.x, self.y = self.position(frame)
+
+        self.width, self.height = self.size()
+
+        self.image_path = image_path
+        self.id_ = id_
+
+    def to_code(self):
+        return f"""
+ft.Image(
+    src="{self.image_path}",left={self.x},top={self.y},width={self.width},height={self.height})
+
+"""
 
 
 class UnknownElement(Vector):
