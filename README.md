@@ -45,7 +45,7 @@ python -m figmaflet.gui
 Once installed, use the CLI to generate Flet code:
 
 ```bash
-python -m figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
+figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
 ```
 
 
