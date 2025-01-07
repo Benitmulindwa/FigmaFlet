@@ -7,11 +7,14 @@ class Vector(Node):
 
     def color(self) -> str:
         """Returns HEX form of element RGB color (str)"""
+        fill = self.node["fills"][0]
         try:
             color = self.node["fills"][0]["color"]
             r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+            # Extract opacity (default to 1 if not provided)
+            opacity = fill.get("opacity", 1) * self.node.get("opacity", 1)
 
-            return f"#{r:02X}{g:02X}{b:02X}"
+            return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
 
         except Exception:
             return "transparent"
@@ -43,7 +46,7 @@ class Rectangle(Vector):
         super().__init__(node)
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
-        self.bg_color = self.color()
+        self.opacity, self.bg_color = self.color()
 
     def get_effects(self) -> dict:
 
@@ -78,7 +81,6 @@ class Rectangle(Vector):
 
     def to_code(self):
         effects = self.get_effects()
-        print(effects)
         blur_str = ""
         if effects["background_blur"]:
             blur = effects["background_blur"]
@@ -91,7 +93,7 @@ class Rectangle(Vector):
             height={self.height},
             {blur_str}
             border_radius={self.corner_radius},
-            bgcolor="{self.bg_color}",)
+            bgcolor=ft.colors.with_opacity({self.opacity},"{self.bg_color}"),)
 """
 
 
@@ -101,7 +103,8 @@ class Text(Vector):
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
 
-        self.text_color = self.color()
+        self.text_opacity, self.text_color = self.color()
+
         self.font, self.font_size, self.font_weight = self.font_property()
         if "\n" in self.characters:
             self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
