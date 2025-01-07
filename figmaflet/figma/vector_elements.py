@@ -45,6 +45,29 @@ class Rectangle(Vector):
         self.width, self.height = self.size()
         self.bg_color = self.color()
 
+    def get_effects(self) -> dict:
+
+        effects = {"shadow": None, "background_blur": None}
+        try:
+            for effect in self.get("effects", []):
+                if effect["type"] == "DROP_SHADOW" and effect["visible"]:
+                    shadow_color = self.bg_color
+                    offset = effect["offset"]
+                    blur = effect.get("radius", 0)
+                    spread = effect.get("spread", 0)  # Optional
+                    effects["shadow"] = {
+                        "color": shadow_color,
+                        "offset_x": int(offset["x"]),
+                        "offset_y": int(offset["y"]),
+                        "blur": int(blur),
+                        "spread": int(spread),
+                    }
+                elif effect["type"] == "BACKGROUND_BLUR" and effect["visible"]:
+                    effects["background_blur"] = {"radius": effect.get("radius", 0)}
+        except KeyError:
+            pass
+        return effects
+
     @property
     def corner_radius(self):
         return self.node.get("cornerRadius")
@@ -54,13 +77,19 @@ class Rectangle(Vector):
         return self.node.get("rectangleCornerRadii")
 
     def to_code(self):
-
+        effects = self.get_effects()
+        print(effects)
+        blur_str = ""
+        if effects["background_blur"]:
+            blur = effects["background_blur"]
+            blur_str = f"blur={blur['radius']},"
         return f"""
         ft.Container(
             left={self.x},
             top={self.y},
             width={self.width},
             height={self.height},
+            {blur_str}
             border_radius={self.corner_radius},
             bgcolor="{self.bg_color}",)
 """
