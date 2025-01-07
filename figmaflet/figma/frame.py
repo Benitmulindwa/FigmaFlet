@@ -44,9 +44,9 @@ class Frame(Node):
             )
         elif element_type == "rectangle" and element["fills"][0]["type"] == "IMAGE":
             return self.handle_image_element(element)
-        if element_name == "rectangle" or element_type == "rectangle":
+        elif element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
-        if element_type == "text":
+        elif element_type == "text":
             return Text(element, self)
 
         else:
