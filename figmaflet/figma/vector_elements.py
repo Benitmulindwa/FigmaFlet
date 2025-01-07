@@ -81,10 +81,24 @@ class Rectangle(Vector):
 
     def to_code(self):
         effects = self.get_effects()
+        # Shadow to flet compatible str
+        shadow_str = ""
+        if effects["shadow"]:
+            shadow = effects["shadow"]
+            shadow_str = f"""
+            shadow=ft.BoxShadow(
+                spread_radius={shadow["spread"]},
+                blur_radius={shadow["blur"]//5},
+                offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
+                color="{shadow["color"]}"
+            ),
+            """
+        # blur to flet compatible str
         blur_str = ""
         if effects["background_blur"]:
             blur = effects["background_blur"]
             blur_str = f"blur={blur['radius']},"
+
         return f"""
         ft.Container(
             left={self.x},
@@ -92,6 +106,7 @@ class Rectangle(Vector):
             width={self.width},
             height={self.height},
             {blur_str}
+            {shadow_str}
             border_radius={self.corner_radius},
             bgcolor=ft.colors.with_opacity({self.opacity},"{self.bg_color}"),)
 """
