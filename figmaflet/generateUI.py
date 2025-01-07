@@ -17,7 +17,7 @@ class UI:
         # Generate Flet code for each frame
 
         for f in self.file_data["document"]["children"][0]["children"]:
-            frame = Frame(f)
+            frame = Frame(f, figma_file=self.figma_file, output_path=self.local_path)
             # frames.append(frame)
             # Render the template
             t = Template(TEMPLATE)

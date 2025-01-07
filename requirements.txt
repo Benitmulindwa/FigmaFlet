@@ -1,3 +1,4 @@
 flet[desktop]
 requests
 jinja2
+pillow

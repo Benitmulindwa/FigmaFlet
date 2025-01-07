@@ -1,9 +1,11 @@
 from .node import Node
-from .vector_elements import Rectangle, Text, UnknownElement
+from .vector_elements import Rectangle, Text, Image, UnknownElement
+from ..utils import download_image
+from pathlib import Path
 
 
 class Frame(Node):
-    def __init__(self, node, parent=None):
+    def __init__(self, node, output_path, figma_file, parent=None):
         super().__init__(node)
 
         self.parent = parent
@@ -14,7 +16,16 @@ class Frame(Node):
 
         self.border_radius = self.get_border_radius()
         self.shadow = self.get_shadow()
-        # self.counter = {}
+
+        self.counter = {}
+
+        self.figma_file = figma_file
+
+        self.output_path: Path = output_path
+        self.assets_path: Path = output_path / "assets"
+
+        self.output_path.mkdir(parents=True, exist_ok=True)
+        self.assets_path.mkdir(parents=True, exist_ok=True)
 
         self.elements = [
             self.create_element(child) for child in self.children if Node(child).visible
@@ -25,13 +36,32 @@ class Frame(Node):
         element_type = element["type"].strip().lower()
 
         if element_type == "frame" or element_type == "group":
-            return Frame(element, self)
+            return Frame(
+                element,
+                figma_file=self.figma_file,
+                output_path=self.output_path,
+                parent=self,
+            )
+        elif element_type == "rectangle" and element["fills"][0]["type"] == "IMAGE":
+            return self.handle_image_element(element)
         if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
         if element_type == "text":
             return Text(element, self)
+
         else:
             return UnknownElement(element, self)
+
+    def handle_image_element(self, element):
+        self.counter[Image] = self.counter.get(Image, 0) + 1
+        item_id = element["id"]
+        image_url = self.figma_file.get_image(item_id)
+        image_path = self.assets_path / f"image_{self.counter[Image]}.png"
+        download_image(image_url, image_path)
+
+        image_path = image_path.relative_to(self.assets_path)
+
+        return Image(element, self, image_path, id_=f"{self.counter[Image]}")
 
     @property
     def children(self):

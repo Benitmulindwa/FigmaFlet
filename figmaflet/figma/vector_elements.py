@@ -61,7 +61,7 @@ class Rectangle(Vector):
             top={self.y},
             width={self.width},
             height={self.height},
-            border_radius={self.rectangle_corner_radii},
+            border_radius={self.corner_radius},
             bgcolor="{self.bg_color}",)
 """
 
@@ -135,7 +135,6 @@ class Image(Vector):
         super().__init__(node)
 
         self.x, self.y = self.position(frame)
-
         self.width, self.height = self.size()
 
         self.image_path = image_path
