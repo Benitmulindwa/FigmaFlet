@@ -23,7 +23,7 @@ class Vector(Node):
         bbox = self.node["absoluteBoundingBox"]
         width = bbox["width"]
         height = bbox["height"]
-        return width, height
+        return int(width), int(height)
 
     def position(self, frame):
         # Returns element coordinates as x (int) and y (int)
@@ -97,7 +97,7 @@ class Rectangle(Vector):
         blur_str = ""
         if effects["background_blur"]:
             blur = effects["background_blur"]
-            blur_str = f"blur={blur['radius']},"
+            blur_str = f"blur={blur['radius']//2},"
 
         return f"""
         ft.Container(
@@ -108,7 +108,7 @@ class Rectangle(Vector):
             {blur_str}
             {shadow_str}
             border_radius={self.corner_radius},
-            bgcolor=ft.colors.with_opacity({self.opacity},"{self.bg_color}"),)
+            bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),)
 """
 
 
