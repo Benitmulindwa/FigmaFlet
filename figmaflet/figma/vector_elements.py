@@ -1,4 +1,5 @@
 from .node import Node
+from ..utils import get_fonts_urls
 
 
 class Vector(Node):
@@ -120,7 +121,10 @@ class Text(Vector):
 
         self.text_opacity, self.text_color = self.color()
 
-        self.font, self.font_size, self.font_weight = self.font_property()
+        self.font_family, self.font_size, self.font_weight = self.font_property()
+
+        get_fonts_urls(self.font_family)
+
         if "\n" in self.characters:
             self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
         else:

@@ -3,38 +3,25 @@ import requests
 from PIL import Image
 
 
-def download_font(font_family, output_path):
+def get_fonts_urls(font_family):
     # Format the font-family name for URL
-    font_family_url = font_family.replace(" ", "+")
-    google_fonts_url = (
-        f"https://fonts.googleapis.com/css2?family={font_family_url}&display=swap"
-    )
-
+    font_family_name = font_family.split()
+    # print(font_family_url)
+    google_fonts_url = f"https://fonts.googleapis.com/css2?family={font_family_name[0]}"
+    # print(google_fonts_url)
     # Fetch the font CSS
     response = requests.get(google_fonts_url)
     if response.status_code == 200:
         css_content = response.text
 
-        # Save the CSS file
-        css_path = output_path / f"{font_family}.css"
-        with open(css_path, "w") as css_file:
-            css_file.write(css_content)
-
-        # Extract font file URLs from the CSS and download them
+        # # Extract font file URLs from the CSS and download them
         font_urls = [
             line.split("url(")[-1].split(")")[0].strip('"')
             for line in css_content.splitlines()
             if "url(" in line
         ]
+        return font_urls
 
-        for font_url in font_urls:
-            font_response = requests.get(font_url)
-            if font_response.status_code == 200:
-                font_file_name = font_url.split("/")[-1]
-                font_file_path = output_path / font_file_name
-                with open(font_file_path, "wb") as font_file:
-                    font_file.write(font_response.content)
-                print(f"Downloaded {font_file_name} to {font_file_path}")
     else:
         print(
             f"Failed to fetch font CSS for {font_family}. Status code: {response.status_code}"
