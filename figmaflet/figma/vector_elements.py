@@ -178,6 +178,29 @@ class Text(Vector):
         """
 
 
+class TextField(Vector):
+    def __init__(self, node, frame):
+        super().__init__(node)
+
+        # self.id_ = id_
+        # self.image_path = image_path
+
+        self.x, self.y = self.position(frame)
+        self.width, self.height = self.size()
+
+        self.opacity, self.bg_color = self.color()
+
+        corner_radius = self.get("cornerRadius", 0)
+        # corner_radius = min(corner_radius, height / 2)
+        # self.entry_width = width - (corner_radius * 2)
+        # self.entry_height = height - 2
+
+    def to_code(self):
+        return f"""
+        ft.TextField(width={self.width},height={self.height},bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}")) 
+"""
+
+
 class Image(Vector):
     def __init__(self, node, frame, image_path, *, id_):
         super().__init__(node)

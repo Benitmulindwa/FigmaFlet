@@ -1,5 +1,5 @@
 from .node import Node
-from .vector_elements import Rectangle, Text, Image, UnknownElement
+from .vector_elements import Rectangle, Text, TextField, Image, UnknownElement
 from ..utils import download_image
 from pathlib import Path
 
@@ -42,9 +42,12 @@ class Frame(Node):
                 output_path=self.output_path,
                 parent=self,
             )
+        elif element_name == "textfield":
+            return TextField(element, self)
+
         elif element_type == "rectangle" and element["fills"][0]["type"] == "IMAGE":
             return self.handle_image_element(element)
-        elif element_name == "rectangle" or element_type == "rectangle":
+        if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
         elif element_type == "text":
             return Text(element, self)
