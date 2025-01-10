@@ -1,5 +1,4 @@
 from .node import Node
-from ..utils import get_fonts_urls
 
 
 class Vector(Node):
@@ -123,8 +122,6 @@ class Text(Vector):
 
         self.font_family, self.font_size, self.font_weight = self.font_property()
 
-        get_fonts_urls(self.font_family)
-
         if "\n" in self.characters:
             self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
         else:
@@ -174,7 +171,7 @@ class Text(Vector):
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value={self.text}, size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",text_align=ft.TextAlign.{self.text_align}),
+            content=ft.Text(value={self.text}, size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",font_family="{self.font_family}",text_align=ft.TextAlign.{self.text_align}),
             left={self.x},
             top={self.y},
             )

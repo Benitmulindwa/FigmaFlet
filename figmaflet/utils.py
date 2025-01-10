@@ -20,7 +20,8 @@ def get_fonts_urls(font_family):
             for line in css_content.splitlines()
             if "url(" in line
         ]
-        return font_urls
+        page_settings = f"{font_family}:{font_urls[0]}"
+        return page_settings
 
     else:
         print(

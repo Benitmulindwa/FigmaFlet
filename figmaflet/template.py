@@ -6,6 +6,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.padding=0
+    page.fonts={{font_urls}}
     page.add(
        ft.Stack([
         {{ elements }}
