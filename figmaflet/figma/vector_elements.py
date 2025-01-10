@@ -5,6 +5,18 @@ class Vector(Node):
     def __init__(self, node: dict) -> None:
         super().__init__(node)
 
+    def strockes_color(self):
+
+        try:
+            stroke = self.node["strokes"][0]
+            color = self.node["strokes"][0]["color"]
+            r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+            # Extract opacity (default to 1 if not provided)
+            opacity = stroke.get("opacity", 1) * self.node.get("opacity", 1)
+            return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
+        except:
+            return [1, "transparent"]
+
     def color(self) -> str:
         """Returns HEX form of element RGB color (str)"""
         fill = self.node["fills"][0]
@@ -187,17 +199,29 @@ class TextField(Vector):
 
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
-
+        self.border_opacity, self.border_color = self.strockes_color()
+        self.border_width = int(self.node["strokeWeight"])
         self.opacity, self.bg_color = self.color()
 
-        corner_radius = self.get("cornerRadius", 0)
+        self.border_radius = self.get("rectangleCornerRadii", 0)
         # corner_radius = min(corner_radius, height / 2)
         # self.entry_width = width - (corner_radius * 2)
         # self.entry_height = height - 2
+        # cursor_color="#1d3263",
+        # cursor_height=22,
 
     def to_code(self):
         return f"""
-        ft.TextField(width={self.width},height={self.height},bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}")) 
+        ft.Container(
+            content=ft.TextField(
+                width={self.width},
+                height={self.height},
+                border=ft.border.all({self.border_width}, "{self.border_color}"),
+                border_radius={self.border_radius},
+                bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
+                ),
+            left={self.x},
+            top={self.y}, )
 """
 
 
