@@ -64,7 +64,8 @@ Provide the Figma file URL containing your design; This is your figma project's 
 ### Figmaflet output
 ![figmaflet_5th_try](https://github.com/user-attachments/assets/15727ba1-b619-4e5f-a4be-f410231f9658)
 ## Upcoming Features
-- **Images** and **Icons**
+- **Images**✅
+- **Icons**
 - **TextFields**
 - **Buttons** + **Events handling**(eg: on_hover)
 - **Fonts support**
