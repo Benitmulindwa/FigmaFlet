@@ -204,14 +204,22 @@ class TextField(Vector):
         self.opacity, self.bg_color = self.color()
 
         self.border_radius = self.get("rectangleCornerRadii", 0)
-        # corner_radius = min(corner_radius, height / 2)
-        # self.entry_width = width - (corner_radius * 2)
-        # self.entry_height = height - 2
-        # cursor_color="#1d3263",
-        # cursor_height=22,
+
+    def text_color_from_bg(self, bg_color):
+        # Assuming bg_color is a hex string like "#RRGGBB"
+        bg_color = bg_color.lstrip("#")
+
+        # hex to RGB
+        r, g, b = int(bg_color[0:2], 16), int(bg_color[2:4], 16), int(bg_color[4:6], 16)
+
+        # luminance
+        luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+
+        # Choose text color based on luminance
+        return "#FFFFFF" if luminance < 0.5 else "#000000"
 
     def to_code(self):
-        # print(self.height / 2)
+
         content_pad = int(self.height - (self.height / 1.5)) / 2
 
         return f"""
@@ -223,7 +231,11 @@ class TextField(Vector):
                 border_radius={self.border_radius},
                 bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
                 cursor_height={self.height/1.5},
-                content_padding={content_pad}
+                cursor_color="{self.text_color_from_bg(self.bg_color)}",
+                focused_border_color={self.border_color},
+                content_padding={content_pad},
+                text_style=ft.TextStyle(color="{self.text_color_from_bg(self.bg_color)}"),
+
                 ),
             left={self.x},
             top={self.y}, )
