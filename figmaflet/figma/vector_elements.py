@@ -211,6 +211,9 @@ class TextField(Vector):
         # cursor_height=22,
 
     def to_code(self):
+        # print(self.height / 2)
+        content_pad = int(self.height - (self.height / 1.5)) / 2
+
         return f"""
         ft.Container(
             content=ft.TextField(
@@ -219,6 +222,8 @@ class TextField(Vector):
                 border=ft.border.all({self.border_width}, "{self.border_color}"),
                 border_radius={self.border_radius},
                 bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
+                cursor_height={self.height/1.5},
+                content_padding={content_pad}
                 ),
             left={self.x},
             top={self.y}, )
