@@ -194,16 +194,13 @@ class TextField(Vector):
     def __init__(self, node, frame):
         super().__init__(node)
 
-        # self.id_ = id_
-        # self.image_path = image_path
-
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
         self.border_opacity, self.border_color = self.strockes_color()
         self.border_width = int(self.node["strokeWeight"])
         self.opacity, self.bg_color = self.color()
 
-        self.border_radius = self.get("rectangleCornerRadii", 0)
+        self.border_radius = self.get("cornerRadius", 0)
 
     def text_color_from_bg(self, bg_color):
         # Assuming bg_color is a hex string like "#RRGGBB"
