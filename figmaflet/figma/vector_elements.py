@@ -232,7 +232,7 @@ class TextField(Vector):
                 bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
                 cursor_height={self.height/1.5},
                 cursor_color="{self.text_color_from_bg(self.bg_color)}",
-                focused_border_color={self.border_color},
+                focused_border_color="{self.border_color}",
                 content_padding={content_pad},
                 text_style=ft.TextStyle(color="{self.text_color_from_bg(self.bg_color)}"),
 
