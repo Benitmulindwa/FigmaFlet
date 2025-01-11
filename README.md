@@ -66,9 +66,9 @@ Provide the Figma file URL containing your design; This is your figma project's 
 ## Upcoming Features
 - **Images**✅
 - **Icons**
-- **TextFields**
+- **TextFields**✅
 - **Buttons** + **Events handling**(eg: on_hover)
-- **Fonts support**
+- **Fonts support**✅
 - **Style Improvements**: better handling of **shadows**, **gradients** and other advanced figma styles
 - **UI Responsivity**
 - **Flexibiliy**: the generated code must be more flexible and easy to edit
