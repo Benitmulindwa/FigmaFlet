@@ -69,13 +69,12 @@ class Rectangle(Vector):
                     shadow_color = self.bg_color
                     offset = effect["offset"]
                     blur = effect.get("radius", 0)
-                    spread = effect.get("spread", 0)  # Optional
+                    # spread = effect.get("spread", )  # Optional
                     effects["shadow"] = {
                         "color": shadow_color,
-                        "offset_x": int(offset["x"]),
-                        "offset_y": int(offset["y"]),
+                        "offset_x": int(offset["x"]) / 2,
+                        "offset_y": int(offset["y"]) / 2,
                         "blur": int(blur),
-                        "spread": int(spread),
                     }
                 elif effect["type"] == "BACKGROUND_BLUR" and effect["visible"]:
                     effects["background_blur"] = {"radius": effect.get("radius", 0)}
@@ -99,10 +98,10 @@ class Rectangle(Vector):
             shadow = effects["shadow"]
             shadow_str = f"""
             shadow=ft.BoxShadow(
-                spread_radius={shadow["spread"]},
+                spread_radius=2,
                 blur_radius={shadow["blur"]//5},
                 offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
-                color="{shadow["color"]}"
+                color=ft.Colors.with_opacity(0.2,"{shadow["color"]}")
             ),
             """
         # blur to flet compatible str
