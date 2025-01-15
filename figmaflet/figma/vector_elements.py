@@ -66,7 +66,10 @@ class Rectangle(Vector):
         try:
             for effect in self.get("effects", []):
                 if effect["type"] == "DROP_SHADOW" and effect["visible"]:
-                    shadow_color = self.bg_color
+                    color = effect["color"]
+                    r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+                    shadow_color = f"#{r:02X}{g:02X}{b:02X}"
+
                     offset = effect["offset"]
                     blur = effect.get("radius", 0)
                     # spread = effect.get("spread", )  # Optional
@@ -101,7 +104,7 @@ class Rectangle(Vector):
                 spread_radius=2,
                 blur_radius={shadow["blur"]//5},
                 offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
-                color=ft.Colors.with_opacity(0.2,"{shadow["color"]}")
+                color=ft.Colors.with_opacity(0.1,"{shadow["color"]}")
             ),
             """
         # blur to flet compatible str
