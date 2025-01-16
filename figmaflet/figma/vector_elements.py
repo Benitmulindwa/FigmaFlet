@@ -95,7 +95,7 @@ class Rectangle(Vector):
                     end = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
                     # print(begin, end)
                     hex_colors = [
-                        f"""ft.Colors.with_opacity({color['a']}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
+                        f"""ft.Colors.with_opacity({round(color['a'],3)}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
                         for stop in gradient_stops
                         for color in [stop["color"]]
                     ]
