@@ -91,10 +91,8 @@ class Rectangle(Vector):
                     end_pos = gradient_pos[1]
 
                     # Map to Flet's Alignment (x, y)
-                    begin = f"ft.Alignment({round(begin_pos["x"])}, {round(begin_pos["y"],2)})"
-                    end = (
-                        f"ft.Alignment({round(end_pos["x"])}, {round(end_pos["y"],2)})"
-                    )
+                    begin = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
+                    end = f"ft.Alignment({round(end_pos["x"],2)}, {round(end_pos["y"],2)})"
 
                     hex_colors = [
                         f"""ft.Colors.with_opacity({color['a']}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
