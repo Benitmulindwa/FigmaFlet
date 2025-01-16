@@ -61,14 +61,6 @@ class Rectangle(Vector):
         self.opacity, self.bg_color = self.color()
         self.gradient = None
 
-    def color_to_hex(self, color):
-        """Convert a color dictionary to a hex string."""
-        r = int(color["r"] * 255)
-        g = int(color["g"] * 255)
-        b = int(color["b"] * 255)
-        a = color["a"]
-        return f"""ft.Colors.with_opacity({a}, "#{r:02x}{g:02x}{b:02x}")"""
-
     def get_effects(self) -> dict:
 
         effects = {"shadow": None, "background_blur": None, "gradient": None}
@@ -93,15 +85,32 @@ class Rectangle(Vector):
             for fill in self.get("fills", []):
                 if fill["type"] == "GRADIENT_LINEAR":
                     gradient_stops = fill.get("gradientStops", [])
+                    gradient_pos = fill.get("gradientHandlePositions", [])
+
+                    begin_pos = gradient_pos[0]
+                    end_pos = gradient_pos[1]
+
+                    # Map to Flet's Alignment (x, y)
+                    begin = f"ft.Alignment({round(begin_pos["x"])}, {round(begin_pos["y"],2)})"
+                    end = (
+                        f"ft.Alignment({round(end_pos["x"])}, {round(end_pos["y"],2)})"
+                    )
+
+                    hex_colors = [
+                        f"""ft.Colors.with_opacity({color['a']}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
+                        for stop in gradient_stops
+                        for color in [stop["color"]]
+                    ]
+
                     if len(gradient_stops) < 2:
                         raise ValueError("Gradient must have at least two stops.")
 
                     effects["gradient"] = {
                         "type": fill["type"],
-                        "colors": [
-                            self.color_to_hex(stop["color"]) for stop in gradient_stops
-                        ],
+                        "colors": hex_colors,
                         "stops": [stop["position"] for stop in gradient_stops],
+                        "begin": begin,
+                        "end": end,
                     }
 
         except KeyError:
@@ -124,8 +133,10 @@ class Rectangle(Vector):
             if gradient["type"] == "GRADIENT_LINEAR":
                 gradient_str = f"""
                         gradient=ft.LinearGradient(
-                                colors={gradient['colors']},
-                                stops={gradient["stops"]}
+                                colors=[{", ".join(gradient['colors'])}],
+                                stops={gradient["stops"]},
+                                begin={gradient["begin"]},
+                                end={gradient["end"]}
                         )
                 """
 
