@@ -91,9 +91,9 @@ class Rectangle(Vector):
                     end_pos = gradient_pos[1]
 
                     # Map to Flet's Alignment (x, y)
-                    begin = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
-                    end = f"ft.Alignment({round(end_pos["x"],2)}, {round(end_pos["y"],2)})"
-
+                    begin = f"ft.Alignment({round(end_pos["x"],2)}, {round(end_pos["y"],2)})"
+                    end = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
+                    # print(begin, end)
                     hex_colors = [
                         f"""ft.Colors.with_opacity({color['a']}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
                         for stop in gradient_stops
@@ -130,12 +130,13 @@ class Rectangle(Vector):
             gradient = effects["gradient"]
             if gradient["type"] == "GRADIENT_LINEAR":
                 gradient_str = f"""
-                        gradient=ft.LinearGradient(
-                                colors=[{", ".join(gradient['colors'])}],
-                                stops={gradient["stops"]},
-                                begin={gradient["begin"]},
-                                end={gradient["end"]}
-                        )
+                gradient=ft.LinearGradient(
+                    colors=[{", ".join(gradient['colors'])}],
+                    # stops={gradient["stops"]},
+                    begin={gradient["begin"]},
+                    end={gradient["end"]},
+                    rotation=3.1415
+                )
                 """
 
         # Shadow to flet compatible str
