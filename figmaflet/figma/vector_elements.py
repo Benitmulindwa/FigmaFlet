@@ -29,7 +29,7 @@ class Vector(Node):
             return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
 
         except Exception:
-            return "transparent"
+            return [1, "transparent"]
 
     def size(self):
         bbox = self.node["absoluteBoundingBox"]
@@ -59,10 +59,19 @@ class Rectangle(Vector):
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
         self.opacity, self.bg_color = self.color()
+        self.gradient = None
+
+    def color_to_hex(self, color):
+        """Convert a color dictionary to a hex string."""
+        r = int(color["r"] * 255)
+        g = int(color["g"] * 255)
+        b = int(color["b"] * 255)
+        a = color["a"]
+        return f"""ft.Colors.with_opacity({a}, "#{r:02x}{g:02x}{b:02x}")"""
 
     def get_effects(self) -> dict:
 
-        effects = {"shadow": None, "background_blur": None}
+        effects = {"shadow": None, "background_blur": None, "gradient": None}
         try:
             for effect in self.get("effects", []):
                 if effect["type"] == "DROP_SHADOW" and effect["visible"]:
@@ -72,7 +81,7 @@ class Rectangle(Vector):
 
                     offset = effect["offset"]
                     blur = effect.get("radius", 0)
-                    # spread = effect.get("spread", )  # Optional
+
                     effects["shadow"] = {
                         "color": shadow_color,
                         "offset_x": int(offset["x"]) / 2,
@@ -81,6 +90,20 @@ class Rectangle(Vector):
                     }
                 elif effect["type"] == "BACKGROUND_BLUR" and effect["visible"]:
                     effects["background_blur"] = {"radius": effect.get("radius", 0)}
+            for fill in self.get("fills", []):
+                if fill["type"] == "GRADIENT_LINEAR":
+                    gradient_stops = fill.get("gradientStops", [])
+                    if len(gradient_stops) < 2:
+                        raise ValueError("Gradient must have at least two stops.")
+
+                    effects["gradient"] = {
+                        "type": fill["type"],
+                        "colors": [
+                            self.color_to_hex(stop["color"]) for stop in gradient_stops
+                        ],
+                        "stops": [stop["position"] for stop in gradient_stops],
+                    }
+
         except KeyError:
             pass
         return effects
@@ -95,6 +118,17 @@ class Rectangle(Vector):
 
     def to_code(self):
         effects = self.get_effects()
+        gradient_str = ""
+        if effects["gradient"]:
+            gradient = effects["gradient"]
+            if gradient["type"] == "GRADIENT_LINEAR":
+                gradient_str = f"""
+                        gradient=ft.LinearGradient(
+                                colors={gradient['colors']},
+                                stops={gradient["stops"]}
+                        )
+                """
+
         # Shadow to flet compatible str
         shadow_str = ""
         if effects["shadow"]:
@@ -122,7 +156,9 @@ class Rectangle(Vector):
             {blur_str}
             {shadow_str}
             border_radius={self.corner_radius},
-            bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),)
+            bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
+            {gradient_str}
+            )
 """
 
 
