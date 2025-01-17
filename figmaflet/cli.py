@@ -4,11 +4,11 @@ from pathlib import Path
 from figmaflet.generateUI import UI
 
 
-def extract_file_key(url):
-    match = re.search(r"/design/([a-zA-Z0-9]+)", url)
-    if match:
-        return match.group(1)
-    return None
+# def extract_file_key(url):
+#     match = re.search(r"/design/([a-zA-Z0-9]+)", url)
+#     if match:
+#         return match.group(1)
+#     return None
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
 
     ui = UI(
         token=args.apikey,
-        file_key=extract_file_key(args.fileurl),
+        file_key=args.fileurl,
         local_path=Path(args.output),
     )
     ui.generate()
