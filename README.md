@@ -1,4 +1,9 @@
-# FigmaFlet
+<p align="center">
+  <img align="center" src="https://github.com/user-attachments/assets/7c2116cd-b31d-464d-b024-9001292e149e" width=200 height=200>
+</p>
+
+
+<h1 align="center"> FigmaFlet </h1>
 
 FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It streamlines the process of transforming your Figma prototypes into production-ready Python code using the Flet framework. 
 
@@ -14,7 +19,7 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 - **LinearGradient**
 - **TextFields**
 
-## Installation
+## 🛠Installation
 
 ### From Source
 1. Clone the repository:
@@ -32,7 +37,7 @@ pip install -r requirements.txt
 pip install figmaflet
 ```
 
-## Usage
+## 🧰Usage
 
 1. Launch the GUI to interactively input your API token, file URL, and output path:
 
@@ -53,12 +58,10 @@ Once installed, use the CLI to generate Flet code:
 figmaflet --apitoken YOUR_API_TOKEN --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
 ```
 
-
-Figma API Key
+#### Figma API Token
 You will need your Figma API token to access design files. Generate your key by visiting your [Figma](https://figma.com) account settings.
 
-
-File URL
+#### File URL
 Provide the Figma file URL containing your design; This is your figma project's URL.
 
 ## 🔥Examples:
@@ -85,7 +88,7 @@ Contributions to FigmaFlet are highly welcomed!
 - **Create a feature branch.**
 - **Submit a pull request with a detailed explanation of your changes.**
 ## License
-This project is licensed under the Apache-2.0 License. See the LICENSE file for details.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Author
 Benit Mulindwa - [GitHub](https://github.com/benitmulindwa)
