@@ -8,6 +8,11 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 - **Automatic Code Generation**: Generate Flet UI code from your designs with minimal manual effort.
 - **Multi-line Text Handling**: Supports multi-line text elements seamlessly.
 - **Graphical Interface**: Provides an intuitive GUI for entering API tokens, file URLs, and output paths.
+- **Images**
+- **Font-families**
+- **Shadow**
+- **LinearGradient**
+- **TextFields**
 
 ## Installation
 
@@ -45,7 +50,7 @@ python -m figmaflet.gui
 Once installed, use the CLI to generate Flet code:
 
 ```bash
-figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
+figmaflet --apitoken YOUR_API_TOKEN --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
 ```
 
 
@@ -64,11 +69,8 @@ Provide the Figma file URL containing your design; This is your figma project's 
 ### Figmaflet output
 ![figmaflet_5th_try](https://github.com/user-attachments/assets/15727ba1-b619-4e5f-a4be-f410231f9658)
 ## Upcoming Features
-- **Images**✅
 - **Icons**
-- **TextFields**✅
 - **Buttons** + **Events handling**(eg: on_hover)
-- **Fonts support**✅
 - **Style Improvements**: better handling of **shadows**, **gradients** and other advanced figma styles
 - **UI Responsivity**
 - **Flexibiliy**: the generated code must be more flexible and easy to edit
