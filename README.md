@@ -61,13 +61,12 @@ You will need your Figma API token to access design files. Generate your key by 
 File URL
 Provide the Figma file URL containing your design; This is your figma project's URL.
 
-## Results:
-### Figma design
+## 🔥Examples:
 
 ![figmaOriginal](https://github.com/user-attachments/assets/054e5b07-aece-45ba-812b-4b6dceaaeb86)
+##
+![figmaflet0 0 4](https://github.com/user-attachments/assets/5fd92ffe-7c82-4f52-8dcd-85585a70d553)
 
-### Figmaflet output
-![figmaflet_5th_try](https://github.com/user-attachments/assets/15727ba1-b619-4e5f-a4be-f410231f9658)
 ## Upcoming Features
 - **Icons**
 - **Buttons** + **Events handling**(eg: on_hover)
