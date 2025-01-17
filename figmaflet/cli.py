@@ -13,7 +13,7 @@ from figmaflet.generateUI import UI
 
 def main():
     parser = argparse.ArgumentParser(description="Generate Flet UI from Figma designs.")
-    parser.add_argument("--apikey", required=True, help="Your Figma API key.")
+    parser.add_argument("--apitoken", required=True, help="Your Figma API token.")
     parser.add_argument("--fileurl", required=True, help="The URL of the Figma file.")
     parser.add_argument(
         "--output", required=True, help="Output file for the generated UI code."
@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
 
     ui = UI(
-        token=args.apikey,
+        token=args.apitoken,
         file_key=args.fileurl,
         local_path=Path(args.output),
     )
