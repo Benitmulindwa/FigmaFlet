@@ -169,7 +169,6 @@ class Frame(Node):
                 width={self.width},
                 height={self.height},
                 border_radius={self.border_radius},
-                
                 {shadow_str}
                 bgcolor="{self.bg_color}",
                 content=ft.Stack([

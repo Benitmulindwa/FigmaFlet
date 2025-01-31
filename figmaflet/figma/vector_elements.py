@@ -83,8 +83,14 @@ class Rectangle(Vector):
                 elif effect["type"] == "BACKGROUND_BLUR" and effect["visible"]:
                     effects["background_blur"] = {"radius": effect.get("radius", 0)}
             for fill in self.get("fills", []):
+                gradient_stops = fill.get("gradientStops", [])
+                hex_colors = [
+                    f"""ft.Colors.with_opacity({round(color['a'],3)}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
+                    for stop in gradient_stops
+                    for color in [stop["color"]]
+                ]
                 if fill["type"] == "GRADIENT_LINEAR":
-                    gradient_stops = fill.get("gradientStops", [])
+
                     gradient_pos = fill.get("gradientHandlePositions", [])
 
                     begin_pos = gradient_pos[0]
@@ -94,11 +100,6 @@ class Rectangle(Vector):
                     begin = f"ft.Alignment({round(end_pos["x"],2)}, {round(end_pos["y"],2)})"
                     end = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
                     # print(begin, end)
-                    hex_colors = [
-                        f"""ft.Colors.with_opacity({round(color['a'],3)}, "#{int(color['r'] * 255):02x}{int(color['g'] * 255):02x}{int(color['b'] * 255):02x}")"""
-                        for stop in gradient_stops
-                        for color in [stop["color"]]
-                    ]
 
                     if len(gradient_stops) < 2:
                         raise ValueError("Gradient must have at least two stops.")
@@ -109,6 +110,36 @@ class Rectangle(Vector):
                         "stops": [stop["position"] for stop in gradient_stops],
                         "begin": begin,
                         "end": end,
+                    }
+                elif fill["type"] == "GRADIENT_RADIAL":
+                    gradient_center = fill.get("gradientHandlePositions", [])
+                    if len(gradient_center) < 3:
+                        raise ValueError(
+                            "Radial gradient must have valid handle positions (center and radii)."
+                        )
+
+                    # The center position is the first handle
+                    center = gradient_center[0]
+                    radius_start = gradient_center[1]
+                    radius_end = gradient_center[2]
+
+                    # Map to Flet's Alignment (x, y)
+                    center_alignment = f"ft.Alignment({round(center['x'], 2)}, {round(center['y'], 2)})"
+                    radius = round(
+                        (
+                            (radius_end["x"] - radius_start["x"]) ** 2
+                            + (radius_end["y"] - radius_start["y"]) ** 2
+                        )
+                        ** 0.5,
+                        2,
+                    )
+
+                    effects["gradient"] = {
+                        "type": fill["type"],
+                        "colors": hex_colors,
+                        "stops": [stop["position"] for stop in gradient_stops],
+                        "center": center_alignment,
+                        "radius": radius,
                     }
 
         except KeyError:
@@ -136,6 +167,13 @@ class Rectangle(Vector):
                     begin={gradient["begin"]},
                     end={gradient["end"]},
                     rotation=3.1415
+                )
+                """
+            if gradient["type"] == "GRADIENT_RADIAL":
+                gradient_str = f"""
+                gradient=ft.RadialGradient(
+                    colors=[{", ".join(gradient['colors'])}],
+                    stops={gradient["stops"]},
                 )
                 """
 
