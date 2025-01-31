@@ -1,4 +1,9 @@
-# FigmaFlet
+<p align="center">
+  <img align="center" src="https://github.com/user-attachments/assets/7c2116cd-b31d-464d-b024-9001292e149e" width=200 height=200>
+</p>
+
+
+<h1 align="center"> FigmaFlet </h1>
 
 FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It streamlines the process of transforming your Figma prototypes into production-ready Python code using the Flet framework. 
 
@@ -8,8 +13,13 @@ FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It 
 - **Automatic Code Generation**: Generate Flet UI code from your designs with minimal manual effort.
 - **Multi-line Text Handling**: Supports multi-line text elements seamlessly.
 - **Graphical Interface**: Provides an intuitive GUI for entering API tokens, file URLs, and output paths.
+- **Images**
+- **Font-families**
+- **Shadow**
+- **LinearGradient**
+- **TextFields**
 
-## Installation
+## 🛠Installation
 
 ### From Source
 1. Clone the repository:
@@ -27,7 +37,7 @@ pip install -r requirements.txt
 pip install figmaflet
 ```
 
-## Usage
+## 🧰Usage
 
 1. Launch the GUI to interactively input your API token, file URL, and output path:
 
@@ -45,30 +55,24 @@ python -m figmaflet.gui
 Once installed, use the CLI to generate Flet code:
 
 ```bash
-figmaflet --apikey YOUR_API_KEY --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
+figmaflet --apitoken YOUR_API_TOKEN --fileurl YOUR_FILE_URL --output YOUR_OUTPUT_PATH
 ```
 
-
-Figma API Key
+#### Figma API Token
 You will need your Figma API token to access design files. Generate your key by visiting your [Figma](https://figma.com) account settings.
 
-
-File URL
+#### File URL
 Provide the Figma file URL containing your design; This is your figma project's URL.
 
-## Results:
-### Figma design
+## 🔥Examples:
 
 ![figmaOriginal](https://github.com/user-attachments/assets/054e5b07-aece-45ba-812b-4b6dceaaeb86)
+##
+![figmaflet0 0 4](https://github.com/user-attachments/assets/5fd92ffe-7c82-4f52-8dcd-85585a70d553)
 
-### Figmaflet output
-![figmaflet_5th_try](https://github.com/user-attachments/assets/15727ba1-b619-4e5f-a4be-f410231f9658)
 ## Upcoming Features
-- **Images**✅
 - **Icons**
-- **TextFields**✅
 - **Buttons** + **Events handling**(eg: on_hover)
-- **Fonts support**✅
 - **Style Improvements**: better handling of **shadows**, **gradients** and other advanced figma styles
 - **UI Responsivity**
 - **Flexibiliy**: the generated code must be more flexible and easy to edit
@@ -84,7 +88,7 @@ Contributions to FigmaFlet are highly welcomed!
 - **Create a feature branch.**
 - **Submit a pull request with a detailed explanation of your changes.**
 ## License
-This project is licensed under the Apache-2.0 License. See the LICENSE file for details.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Author
 Benit Mulindwa - [GitHub](https://github.com/benitmulindwa)
