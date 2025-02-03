@@ -221,9 +221,9 @@ class Text(Vector):
         self.font_family, self.font_size, self.font_weight = self.font_property()
 
         if "\n" in self.characters:
-            self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
+            self.text = f"""{self.characters.replace("\n", "\\n")}"""
         else:
-            self.text = f'"{self.characters}"'
+            self.text = f"{self.characters}"
 
         self.text_align = self.style["textAlignHorizontal"]
 
