@@ -6,6 +6,14 @@
 <h1 align="center"> FigmaFlet </h1>
 
 FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It streamlines the process of transforming your Figma prototypes into production-ready Python code using the Flet framework. 
+## Support Figmaflet
+If this project resonate with you, consider supporting its development with a donation. Your contributions will help me maintain and enhance this project. 
+
+<a href="https://www.paypal.com/donate/?hosted_button_id=7L6XHBCCZL9K4"> 
+<img src="https://img.shields.io/badge/Donate-PayPal-blue.svg" width="200">
+</a>
+
+### Thank you for your support! 💕
 
 ## Features
 
