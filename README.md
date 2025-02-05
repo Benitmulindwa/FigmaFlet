@@ -101,8 +101,9 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 Benit Mulindwa - [GitHub](https://github.com/benitmulindwa)
 
 ### Acknowledgments
-Special thanks to the tkinterdesigner and Figma communities for their support and inspiration.
+Special thanks to the [tkinterdesigner](https://github.com/ParthJadhav/Tkinter-Designer?tab=readme-ov-file) and [Figma](https://figma.com) communities for their support and inspiration.
 
 ### Contact
 For questions, suggestions, or feedback, feel free to open an issue or reach out to mulindwabenit@gmail.com.
+Connect with me on [LINKEDIN](https://www.linkedin.com/in/benit-mulindwa-06b11122a/)
 
