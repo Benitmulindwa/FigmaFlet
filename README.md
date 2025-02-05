@@ -6,7 +6,7 @@
 <h1 align="center"> FigmaFlet </h1>
 
 FigmaFlet is a tool that generates Flet UI code directly from Figma designs. It streamlines the process of transforming your Figma prototypes into production-ready Python code using the Flet framework. 
-## Support Figmaflet
+## 🦋Support Figmaflet
 If this project resonate with you, consider supporting its development with a donation. Your contributions will help me maintain and enhance this project. 
 
 <a href="https://www.paypal.com/donate/?hosted_button_id=7L6XHBCCZL9K4"> 
@@ -78,7 +78,7 @@ Provide the Figma file URL containing your design; This is your figma project's 
 ##
 ![figmaflet0 0 4](https://github.com/user-attachments/assets/5fd92ffe-7c82-4f52-8dcd-85585a70d553)
 
-## Upcoming Features
+## 🌱Upcoming Features
 - **Icons**
 - **Buttons** + **Events handling**(eg: on_hover)
 - **UI Responsivity**
@@ -94,10 +94,10 @@ Contributions to FigmaFlet are highly welcomed!
 - **Fork the repository.**
 - **Create a feature branch.**
 - **Submit a pull request with a detailed explanation of your changes.**
-## License
+## 📜License
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
 
-## Author
+## 📝Author
 Benit Mulindwa - [GitHub](https://github.com/benitmulindwa)
 
 ### Acknowledgments
