@@ -97,8 +97,8 @@ class Rectangle(Vector):
                     end_pos = gradient_pos[1]
 
                     # Map to Flet's Alignment (x, y)
-                    begin = f"ft.Alignment({round(end_pos["x"],2)}, {round(end_pos["y"],2)})"
-                    end = f"ft.Alignment({round(begin_pos["x"],2)}, {round(begin_pos["y"],2)})"
+                    begin = f"ft.Alignment({round(end_pos['x'],2)}, {round(end_pos['y'],2)})"
+                    end = f"ft.Alignment({round(begin_pos['x'],2)}, {round(begin_pos['y'],2)})"
                     # print(begin, end)
 
                     if len(gradient_stops) < 2:
@@ -163,9 +163,9 @@ class Rectangle(Vector):
                 gradient_str = f"""
                 gradient=ft.LinearGradient(
                     colors=[{", ".join(gradient['colors'])}],
-                    # stops={gradient["stops"]},
-                    begin={gradient["begin"]},
-                    end={gradient["end"]},
+                    # stops={gradient['stops']},
+                    begin={gradient['begin']},
+                    end={gradient['end']},
                     rotation=3.1415
                 )
                 """
@@ -173,7 +173,7 @@ class Rectangle(Vector):
                 gradient_str = f"""
                 gradient=ft.RadialGradient(
                     colors=[{", ".join(gradient['colors'])}],
-                    stops={gradient["stops"]},
+                    stops={gradient['stops']},
                 )
                 """
 
@@ -184,9 +184,9 @@ class Rectangle(Vector):
             shadow_str = f"""
             shadow=ft.BoxShadow(
                 spread_radius=2,
-                blur_radius={shadow["blur"]//5},
-                offset=ft.Offset({shadow["offset_x"]}, {shadow["offset_y"]}),
-                color=ft.Colors.with_opacity(0.1,"{shadow["color"]}")
+                blur_radius={shadow['blur']//5},
+                offset=ft.Offset({shadow['offset_x']}, {shadow['offset_y']}),
+                color=ft.Colors.with_opacity(0.1,"{shadow['color']}")
             ),
             """
         # blur to flet compatible str
@@ -204,7 +204,7 @@ class Rectangle(Vector):
             {blur_str}
             {shadow_str}
             border_radius={self.corner_radius},
-            bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
+            bgcolor=ft.Colors.with_opacity({self.opacity},'{self.bg_color}'),
             {gradient_str}
             )
 """
@@ -269,7 +269,7 @@ class Text(Vector):
     def to_code(self):
         return f"""
         ft.Container(
-            content=ft.Text(value={self.text}, size={self.font_size}, color="{self.text_color}",weight="{self.font_weight}",font_family="{self.font_family}",text_align=ft.TextAlign.{self.text_align}),
+            content=ft.Text(value={self.text}, size={self.font_size}, color='{self.text_color}',weight='{self.font_weight}',font_family="{self.font_family}",text_align=ft.TextAlign.{self.text_align}),
             left={self.x},
             top={self.y},
             )
@@ -310,12 +310,12 @@ class TextField(Vector):
             content=ft.TextField(
                 width={self.width},
                 height={self.height},
-                border=ft.border.all({self.border_width}, "{self.border_color}"),
+                border=ft.border.all({self.border_width}, '{self.border_color}'),
                 border_radius={self.border_radius},
-                bgcolor=ft.Colors.with_opacity({self.opacity},"{self.bg_color}"),
+                bgcolor=ft.Colors.with_opacity({self.opacity},'{self.bg_color}'),
                 cursor_height={self.height/1.5},
-                cursor_color="{self.text_color_from_bg(self.bg_color)}",
-                focused_border_color="{self.border_color}",
+                cursor_color='{self.text_color_from_bg(self.bg_color)}',
+                focused_border_color='{self.border_color}',
                 content_padding={content_pad},
                 text_style=ft.TextStyle(color="{self.text_color_from_bg(self.bg_color)}"),
 
