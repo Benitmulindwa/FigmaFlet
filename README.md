@@ -82,7 +82,7 @@ Provide the Figma file URL containing your design; This is your figma project's 
 - **Icons**
 - **Buttons** + **Events handling**(eg: on_hover)
 - **UI Responsivity**
-- **Flexibiliy**: the generated code must be more flexible and easy to edit
+- **Flexibility**: the generated code must be more flexible and easy to edit
 - **Animations**
 
 
