@@ -67,11 +67,11 @@ class Rectangle(Vector):
         try:
             for effect in self.get("effects", []):
                 if effect["type"] == "DROP_SHADOW" and effect["visible"]:
-                    color = effect["color"]
+                    color = effect.get("color", {})
                     r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
                     shadow_color = f"#{r:02X}{g:02X}{b:02X}"
 
-                    offset = effect["offset"]
+                    offset = effect.get("offset", {"x": 0, "y": 0})
                     blur = effect.get("radius", 0)
 
                     effects["shadow"] = {
@@ -142,8 +142,10 @@ class Rectangle(Vector):
                         "radius": radius,
                     }
 
-        except KeyError:
-            pass
+        except KeyError as e:
+            print(f"Missing key in effect data: {e}")
+        except TypeError as e:
+            print(f"Unexpected NoneType: {e}")
         return effects
 
     @property

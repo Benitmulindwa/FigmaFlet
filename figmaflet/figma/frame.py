@@ -129,8 +129,10 @@ class Frame(Node):
                         "blur": int(blur),
                         "spread": int(spread),
                     }
-        except KeyError:
-            pass
+        except KeyError as e:
+            print(f"{e}")
+        except TypeError as e:
+            print(f"TypeError: {e}")
         return None  # No shadow
 
     def to_code(self):

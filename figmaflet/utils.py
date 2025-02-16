@@ -27,6 +27,7 @@ def get_fonts_urls(font_family):
         print(
             f"Failed to fetch font CSS for {font_family}. Status code: {response.status_code}"
         )
+        return f"Grandstander Regular:https://fonts.gstatic.com/s/grandstander/v18/ga6fawtA-GpSsTWrnNHPCSIMZhhKpFjyNZIQD1--D3g.ttf"
 
 
 def download_image(url, image_path):

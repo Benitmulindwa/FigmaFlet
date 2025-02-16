@@ -27,6 +27,7 @@ class UI:
             self.collect_font_families(frame)
 
             font_list = [get_fonts_urls(family) for family in self.font_families]
+
             font_urls = {
                 item.split(":")[0]: "https:" + item.split(":")[2] for item in font_list
             }
