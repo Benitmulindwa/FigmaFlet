@@ -34,11 +34,12 @@ class Frame(Node):
     def create_element(self, element):
         element_name = element["name"].strip().lower()
         element_type = element["type"].strip().lower()
+
         # Handle TextField detection based on frame and text
         if element_type == "frame" and element_name == "textfield":
             hint_text = None
             for child in element.get("children", []):
-                if child["type"] == "text":
+                if child["type"].strip().lower() == "text":
                     hint_text = child.get(
                         "characters", ""
                     ).strip()  # Extract text content
@@ -55,8 +56,10 @@ class Frame(Node):
         # elif element_name == "textfield":
         #     return TextField(element, self)
 
-        elif element_type == "rectangle" and element["fills"][0]["type"] == "IMAGE":
+        fills = element.get("fills", [])
+        if fills and fills[0].get("type") == "IMAGE":
             return self.handle_image_element(element)
+
         if element_name == "rectangle" or element_type == "rectangle":
             return Rectangle(element, self)
         elif element_type == "text":

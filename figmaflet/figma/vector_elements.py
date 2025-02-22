@@ -8,42 +8,46 @@ class Vector(Node):
     def strockes_color(self):
 
         try:
-            stroke = self.node["strokes"][0]
-            color = self.node["strokes"][0]["color"]
-            r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
-            # Extract opacity (default to 1 if not provided)
-            opacity = stroke.get("opacity", 1) * self.node.get("opacity", 1)
-            return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
+            strokes = self.node.get("strokes", [])
+            if strokes:
+                stroke = strokes[0]
+                color = stroke.get("color", {})
+                r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+                # Extract opacity (default to 1 if not provided)
+                opacity = stroke.get("opacity", 1) * self.node.get("opacity", 1)
+                return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
         except:
             return [1, "transparent"]
 
     def color(self) -> str:
         """Returns HEX form of element RGB color (str)"""
-        fill = self.node["fills"][0]
-        try:
-            color = self.node["fills"][0]["color"]
-            r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
-            # Extract opacity (default to 1 if not provided)
-            opacity = fill.get("opacity", 1) * self.node.get("opacity", 1)
+        fills = self.node.get("fills", [])
+        if fills:
+            try:
+                fill = fills[0]
+                color = fill.get("color", {})
+                r, g, b, *_ = [int(color.get(i, 0) * 255) for i in "rgba"]
+                # Extract opacity (default to 1 if not provided)
+                opacity = fill.get("opacity", 1) * self.node.get("opacity", 1)
 
-            return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
+                return [round(opacity, 2), f"#{r:02X}{g:02X}{b:02X}"]
 
-        except Exception:
-            return [1, "transparent"]
+            except Exception:
+                return [1, "transparent"]
 
     def size(self):
-        bbox = self.node["absoluteBoundingBox"]
-        width = bbox["width"]
-        height = bbox["height"]
+        bbox = self.node.get("absoluteBoundingBox", {})
+        width = bbox.get("width", 0)
+        height = bbox.get("height", 0)
         return int(width), int(height)
 
     def position(self, frame):
         # Returns element coordinates as x (int) and y (int)
-        bbox = self.node["absoluteBoundingBox"]
+        bbox = self.node.get("absoluteBoundingBox", {})
         x = bbox["x"]
         y = bbox["y"]
 
-        frame_bbox = frame.node["absoluteBoundingBox"]
+        frame_bbox = frame.node.get("absoluteBoundingBox")
         frame_x = frame_bbox["x"]
         frame_y = frame_bbox["y"]
 
@@ -285,7 +289,7 @@ class TextField(Vector):
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
         self.border_opacity, self.border_color = self.strockes_color()
-        self.border_width = int(self.node["strokeWeight"])
+        self.border_width = int(self.node.get("strokeWeight", 2.0))
         self.opacity, self.bg_color = self.color()
 
         self.border_radius = self.get("cornerRadius", 0)
