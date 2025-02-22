@@ -34,7 +34,17 @@ class Frame(Node):
     def create_element(self, element):
         element_name = element["name"].strip().lower()
         element_type = element["type"].strip().lower()
+        # Handle TextField detection based on frame and text
+        if element_type == "frame" and element_name == "textfield":
+            hint_text = None
+            for child in element.get("children", []):
+                if child["type"] == "text":
+                    hint_text = child.get(
+                        "characters", ""
+                    ).strip()  # Extract text content
+                    break  # Only take the first text
 
+            return TextField(element, self, hint_text=hint_text)
         if element_type == "frame" or element_type == "group":
             return Frame(
                 element,
@@ -42,8 +52,8 @@ class Frame(Node):
                 output_path=self.output_path,
                 parent=self,
             )
-        elif element_name == "textfield":
-            return TextField(element, self)
+        # elif element_name == "textfield":
+        #     return TextField(element, self)
 
         elif element_type == "rectangle" and element["fills"][0]["type"] == "IMAGE":
             return self.handle_image_element(element)

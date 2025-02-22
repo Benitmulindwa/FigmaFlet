@@ -223,7 +223,7 @@ class Text(Vector):
         self.font_family, self.font_size, self.font_weight = self.font_property()
 
         if "\n" in self.characters:
-            self.text = f'"""{self.characters.replace("\n", "\\\n")}"""'
+            self.text = f'"""{self.characters.replace("\n", "\\n")}"""'
         else:
             self.text = f"'{self.characters}'"
 
@@ -279,7 +279,7 @@ class Text(Vector):
 
 
 class TextField(Vector):
-    def __init__(self, node, frame):
+    def __init__(self, node, frame, hint_text=None):
         super().__init__(node)
 
         self.x, self.y = self.position(frame)
@@ -289,6 +289,7 @@ class TextField(Vector):
         self.opacity, self.bg_color = self.color()
 
         self.border_radius = self.get("cornerRadius", 0)
+        self.hint_text = hint_text
 
     def text_color_from_bg(self, bg_color):
         # Assuming bg_color is a hex string like "#RRGGBB"
@@ -320,7 +321,7 @@ class TextField(Vector):
                 focused_border_color='{self.border_color}',
                 content_padding={content_pad},
                 text_style=ft.TextStyle(color="{self.text_color_from_bg(self.bg_color)}"),
-
+                hint_text="{self.hint_text}",
                 ),
             left={self.x},
             top={self.y}, )
