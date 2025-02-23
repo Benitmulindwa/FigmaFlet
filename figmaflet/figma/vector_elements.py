@@ -6,7 +6,6 @@ class Vector(Node):
         super().__init__(node)
 
     def strockes_color(self):
-
         try:
             strokes = self.node.get("strokes", [])
             if strokes:
@@ -283,7 +282,7 @@ class Text(Vector):
 
 
 class TextField(Vector):
-    def __init__(self, node, frame, hint_text=None):
+    def __init__(self, node, frame, hint_text=""):
         super().__init__(node)
 
         self.x, self.y = self.position(frame)
@@ -317,7 +316,7 @@ class TextField(Vector):
             content=ft.TextField(
                 width={self.width},
                 height={self.height},
-                border=ft.border.all({self.border_width}, '{self.border_color}'),
+                border=ft.border.all({self.border_width}, "ft.Colors.with_opacity({self.border_opacity},'{self.border_color}')"),
                 border_radius={self.border_radius},
                 bgcolor=ft.Colors.with_opacity({self.opacity},'{self.bg_color}'),
                 cursor_height={self.height/1.5},

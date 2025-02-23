@@ -149,7 +149,7 @@ class Frame(Node):
         return None  # No shadow
 
     def to_code(self):
-        # print(self.font_urls)
+
         # border_radius = self.border_radius
         # border_radius_str = (
         #     f"border_radius=ft.border_radius.all({border_radius[0]})"
@@ -179,7 +179,7 @@ class Frame(Node):
         if children_code:
             return f"""
             ft.Container(
-                left={self.x},
+                left={self.x}, 
                 top={self.y},
                 width={self.width},
                 height={self.height},
