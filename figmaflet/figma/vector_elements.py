@@ -316,7 +316,7 @@ class TextField(Vector):
             content=ft.TextField(
                 width={self.width},
                 height={self.height},
-                border=ft.border.all({self.border_width}, "ft.Colors.with_opacity({self.border_opacity},'{self.border_color}')"),
+                border_color=ft.Colors.with_opacity({self.border_opacity},'{self.border_color}'),
                 border_radius={self.border_radius},
                 bgcolor=ft.Colors.with_opacity({self.opacity},'{self.bg_color}'),
                 cursor_height={self.height/1.5},
