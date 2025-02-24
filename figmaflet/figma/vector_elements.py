@@ -63,6 +63,11 @@ class Rectangle(Vector):
         self.width, self.height = self.size()
         self.opacity, self.bg_color = self.color()
         self.gradient = None
+        self.border_str = ""
+        self.border_width = int(self.node.get("strokeWeight", 2.0))
+        if self.strockes_color():
+            self.border_opacity, self.border_color = self.strockes_color()
+            self.border_str = f"border=ft.border.all({self.border_width},ft.Colors.with_opacity({self.border_opacity},'{self.border_color}')),"
 
     def get_effects(self) -> dict:
 
@@ -209,6 +214,7 @@ class Rectangle(Vector):
             {blur_str}
             {shadow_str}
             border_radius={self.corner_radius},
+            {self.border_str}
             bgcolor=ft.Colors.with_opacity({self.opacity},'{self.bg_color}'),
             {gradient_str}
             )
@@ -312,8 +318,8 @@ class TextField(Vector):
         password_str = ""
         if self.is_password:
             password_str = f"""
-            can_reveal_password={self.is_password},
-            password={self.is_password}"""
+                can_reveal_password={self.is_password},
+                password={self.is_password}"""
         content_pad = int(self.height - (self.height / 1.5)) / 2
 
         return f"""
