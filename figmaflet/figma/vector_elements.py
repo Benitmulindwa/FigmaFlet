@@ -282,7 +282,7 @@ class Text(Vector):
 
 
 class TextField(Vector):
-    def __init__(self, node, frame, hint_text=""):
+    def __init__(self, node, frame, hint_text, is_password):
         super().__init__(node)
 
         self.x, self.y = self.position(frame)
@@ -293,6 +293,7 @@ class TextField(Vector):
 
         self.border_radius = self.get("cornerRadius", 0)
         self.hint_text = hint_text
+        self.is_password = is_password
 
     def text_color_from_bg(self, bg_color):
         # Assuming bg_color is a hex string like "#RRGGBB"
@@ -308,7 +309,11 @@ class TextField(Vector):
         return "#FFFFFF" if luminance < 0.5 else "#000000"
 
     def to_code(self):
-
+        password_str = ""
+        if self.is_password:
+            password_str = f"""
+            can_reveal_password={self.is_password},
+            password={self.is_password}"""
         content_pad = int(self.height - (self.height / 1.5)) / 2
 
         return f"""
@@ -325,6 +330,7 @@ class TextField(Vector):
                 content_padding={content_pad},
                 text_style=ft.TextStyle(color="{self.text_color_from_bg(self.bg_color)}"),
                 hint_text="{self.hint_text}",
+                {password_str}
                 ),
             left={self.x},
             top={self.y}, )

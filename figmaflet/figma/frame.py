@@ -36,16 +36,19 @@ class Frame(Node):
         element_type = element["type"].strip().lower()
 
         # Handle TextField detection based on frame and text
-        if element_type == "frame" and element_name == "textfield":
-            hint_text = None
+        if element_type == "frame" and "textfield" in element_name:
+            hint_text = ""
+            is_password = False
+            if "password" in element_name:
+                is_password = True
             for child in element.get("children", []):
                 if child["type"].strip().lower() == "text":
-                    hint_text = child.get(
-                        "characters", ""
-                    ).strip()  # Extract text content
+                    hint_text = child.get("characters", "").strip()
                     break  # Only take the first text
 
-            return TextField(element, self, hint_text=hint_text)
+            return TextField(
+                element, self, hint_text=hint_text, is_password=is_password
+            )
         if element_type == "frame" or element_type == "group":
             return Frame(
                 element,
