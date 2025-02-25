@@ -77,6 +77,9 @@ Provide the Figma file URL containing your design; This is your figma project's 
 ![figmaOriginal](https://github.com/user-attachments/assets/054e5b07-aece-45ba-812b-4b6dceaaeb86)
 ##
 ![figmaflet0 0 4](https://github.com/user-attachments/assets/5fd92ffe-7c82-4f52-8dcd-85585a70d553)
+##
+![figmaflet-signup](https://github.com/user-attachments/assets/550a7dfb-ba85-4fec-8637-6a836d9a296c)
+
 
 ## 🌱Upcoming Features
 - **Icons**
