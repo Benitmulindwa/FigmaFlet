@@ -27,7 +27,7 @@ class Files:
         except ValueError:
             raise RuntimeError("Invalid Input. Please check your input and try again.")
         except requests.ConnectionError:
-            raise RuntimeError("Flet Designer requires internet access to work.")
+            raise RuntimeError("FigmaFlet requires internet access to work.")
         else:
             return response.json()
 

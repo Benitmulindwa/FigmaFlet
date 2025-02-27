@@ -44,11 +44,10 @@ class Frame(Node):
             for child in element.get("children", []):
                 if child["type"].strip().lower() == "text":
                     button_text = child.get("characters", "").strip()
-                    fill = self.node.get("fills", [{}])[0]
+                    fill = child.get("fills", [{}])[0]  # Extract text node color
                     color = fill.get("color", {})
-                    r, g, b, a = [int(color.get(i, 0) * 255) for i in "rgba"]
+                    r, g, b = [int(color.get(i, 0) * 255) for i in "rgb"]
                     text_color = f"#{r:02X}{g:02X}{b:02X}"
-
                 # elif "icon" in child["name"].lower():  # Detect an icon layer
                 #     button_icon = child["name"].split("/")[1].upper()
 

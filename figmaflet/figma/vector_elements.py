@@ -372,7 +372,7 @@ ft.Image(
 
 
 class Button(Vector):
-    def __init__(self, node, frame, text="", text_color="#ffffff"):
+    def __init__(self, node, frame, text, text_color):
         super().__init__(node)
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
@@ -380,7 +380,7 @@ class Button(Vector):
         self.text = text
         self.text_color = text_color
 
-    def to_flet(self):
+    def to_code(self):
         # Extract background color and corner radius
         opacity, bg_color = self.color()
         radius = self.node.get("cornerRadius", 5)
@@ -390,7 +390,7 @@ class Button(Vector):
         ft.FilledButton(
             text='{self.text}',
             width={self.width},
-            hight={self.height},
+            height={self.height},
             style=ft.ButtonStyle(
             shape=ft.RoundedRectangleBorder(radius={radius}),
             bgcolor={{
