@@ -372,10 +372,12 @@ ft.Image(
 
 
 class Button(Vector):
-    def __init__(self, node, parent, text="", icon=None):
+    def __init__(self, node, frame, text=""):
         super().__init__(node)
+        self.x, self.y = self.position(frame)
+        self.width, self.height = self.size()
+
         self.text = text
-        self.icon = icon
 
     def to_flet(self):
         # Extract background color and corner radius
@@ -383,11 +385,20 @@ class Button(Vector):
         radius = self.node.get("cornerRadius", 5)
 
         # Generate Flet button code
-        return f"""ft.ElevatedButton(
-            text={self.text},
-            bgcolor={bg_color},
-            icon=getattr(ft.icons, {self.icon}, None) if {self.icon} else None,
-            style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius={radius})),
+        return f"""
+        ft.FilledButton(
+            text='{self.text}',
+            width={self.width},
+            hight={self.height},
+            style=ft.ButtonStyle(
+            shape=ft.RoundedRectangleBorder(radius={radius}),
+            bgcolor={{
+                    ft.ControlState.DEFAULT: '{bg_color}',
+                    ft.ControlState.HOVERED: '',
+                }},
+            ),
+            left={self.x},
+            top={self.y},
         )"""
 
 
