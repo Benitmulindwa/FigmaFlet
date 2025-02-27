@@ -1,5 +1,5 @@
 from .node import Node
-from .vector_elements import Rectangle, Text, TextField, Image, UnknownElement
+from .vector_elements import Rectangle, Text, TextField, Image, Button, UnknownElement
 from ..utils import download_image
 from pathlib import Path
 
@@ -34,6 +34,25 @@ class Frame(Node):
     def create_element(self, element):
         element_name = element["name"].strip().lower()
         element_type = element["type"].strip().lower()
+
+        # Handle Button detection
+        if element_type == "frame" and "button" in element_name:
+            button_text = ""
+            button_icon = None
+            text_color = "#ffffff"
+            # Extract the button text
+            for child in element.get("children", []):
+                if child["type"].strip().lower() == "text":
+                    button_text = child.get("characters", "").strip()
+                    fill = self.node.get("fills", [{}])[0]
+                    color = fill.get("color", {})
+                    r, g, b, a = [int(color.get(i, 0) * 255) for i in "rgba"]
+                    text_color = f"#{r:02X}{g:02X}{b:02X}"
+
+                # elif "icon" in child["name"].lower():  # Detect an icon layer
+                #     button_icon = child["name"].split("/")[1].upper()
+
+            return Button(element, self, text=button_text, text_color=text_color)
 
         # Handle TextField detection based on frame and text
         if element_type == "frame" and "textfield" in element_name:

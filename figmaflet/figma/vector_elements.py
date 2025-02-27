@@ -372,12 +372,13 @@ ft.Image(
 
 
 class Button(Vector):
-    def __init__(self, node, frame, text=""):
+    def __init__(self, node, frame, text="", text_color="#ffffff"):
         super().__init__(node)
         self.x, self.y = self.position(frame)
         self.width, self.height = self.size()
 
         self.text = text
+        self.text_color = text_color
 
     def to_flet(self):
         # Extract background color and corner radius
@@ -396,6 +397,7 @@ class Button(Vector):
                     ft.ControlState.DEFAULT: '{bg_color}',
                     ft.ControlState.HOVERED: '',
                 }},
+            color='{self.text_color}'
             ),
             left={self.x},
             top={self.y},
